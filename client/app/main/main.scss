@@ -5,6 +5,10 @@
 #banner {
   border-bottom: none;
   margin-top: -20px;
+  img {
+    padding: 0 10px;
+    background: white;
+  }
 }
 
 #banner h1 {
@@ -25,3 +29,8 @@
 .navbar-text {
   margin-left: 15px;
 }
+
+table {
+  margin-top: 20px;
+}
+

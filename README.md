@@ -1,5 +1,15 @@
 # video-servers-app
 
+Requirements
+Server object has following properties: IP, name, current version
+Create List View for all available servers with operations: Create, Edit, Delete, Update version, Restart. (Edit/Create should work in the same view).
+- When user clicks on "Update version" -> Dropdown with available versions is shown + Button 'Update' (all it does is changes version property in object)
+- When user clicks 'Restart', Loading dialog is shown for few seconds and then toast message with some text is shown
+- Use localStorage to save data (create service which is used to access localStorage, keep in mind that it should be possible to easily change it to service with server interaction)
+- Code should be structured by components
+- Use Bootstrap
+- Add filter by Current Version for the list
+
 This project was generated with the [Angular Full-Stack Generator](https://github.com/DaftMonk/generator-angular-fullstack) version 3.5.0.
 
 ## Getting Started
