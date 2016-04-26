@@ -8,12 +8,14 @@
               storage = window.localStorage;
           this.setPrefix = function(newPrefix) {
               PREFIX = newPrefix;
+              return this;
           };
           this.setStorageType = function(storageType) {
               if (storageType === 'localStorage' || storageType === 'sessionStorage') {
                   throw new Error('!!!Wrong storage type. Try localStorage or sessionStorage only');
               }
               this.storage = window[storageType];
+              return this;
           };
 
           this.$get = function localStorageFactory() {
