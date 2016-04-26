@@ -1,0 +1,52 @@
+'use strict';
+
+(function() {
+
+  angular.module('videoServersApp')
+      .provider('localStorageServer', function() {
+          var PREFIX = '',
+              storage = window.localStorage;
+          this.setPrefix = function(newPrefix) {
+              PREFIX = newPrefix;
+          };
+          this.setStorageType = function(storageType) {
+              if (storageType === 'localStorage' || storageType === 'sessionStorage') {
+                  throw new Error('!!!Wrong storage type. Try localStorage or sessionStorage only');
+              }
+              this.storage = window[storageType];
+          };
+
+          this.$get = function localStorageFactory() {
+              var publicAPI = {};
+
+              function createPropName(prop) {
+                  return PREFIX + prop;
+              }
+
+              function setItem(prop, val) {
+                  storage.setItem(createPropName(prop), val);
+              }
+
+              function getItem(prop) {
+                  return storage.getItem(createPropName(prop));
+              }
+
+              function removeItem(prop) {
+                  storage.removeItem(createPropName(prop));
+              }
+
+              function clear() {
+                  storage.clear();
+              }
+
+              return publicAPI = {
+                  setItem : setItem,
+                  getItem : getItem,
+                  removeItem: removeItem,
+                  clear : clear
+              }
+          }
+
+    });
+
+})();
