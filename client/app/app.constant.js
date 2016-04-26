@@ -1,5 +1,5 @@
 (function(angular, undefined) {
-  angular.module("videoServersAppApp.constants", [])
+  angular.module("videoServersApp.constants", [])
 
 .constant("appConfig", {
 	"userRoles": [

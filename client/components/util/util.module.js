@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('videoServersAppApp.util', []);
+angular.module('videoServersApp.util', []);

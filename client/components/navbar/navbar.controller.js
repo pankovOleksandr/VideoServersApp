@@ -19,5 +19,5 @@ class NavbarController {
   }
 }
 
-angular.module('videoServersAppApp')
+angular.module('videoServersApp')
   .controller('NavbarController', NavbarController);

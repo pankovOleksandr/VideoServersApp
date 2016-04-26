@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('videoServersAppApp')
+angular.module('videoServersApp')
   .config(function($routeProvider) {
     $routeProvider
       .when('/', {

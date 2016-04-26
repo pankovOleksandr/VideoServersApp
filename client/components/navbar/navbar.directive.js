@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('videoServersAppApp')
+angular.module('videoServersApp')
   .directive('navbar', () => ({
     templateUrl: 'components/navbar/navbar.html',
     restrict: 'E',

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('videoServersAppApp')
+angular.module('videoServersApp')
   .factory('Modal', function($rootScope, $uibModal) {
     /**
      * Opens a modal

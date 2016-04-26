@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('videoServersAppApp', [
-  'videoServersAppApp.constants',
+angular.module('videoServersApp', [
+  'videoServersApp.constants',
   'ngCookies',
   'ngResource',
   'ngSanitize',

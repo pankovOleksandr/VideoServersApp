@@ -16,7 +16,7 @@ class MainController {
   }
 }
 
-angular.module('videoServersAppApp')
+angular.module('videoServersApp')
   .component('main', {
     templateUrl: 'app/main/main.html',
     controller: MainController

@@ -59,7 +59,7 @@ function UtilService($window) {
   return Util;
 }
 
-angular.module('videoServersAppApp.util')
+angular.module('videoServersApp.util')
   .factory('Util', UtilService);
 
 })();
