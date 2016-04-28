@@ -1,11 +1,17 @@
 'use strict';
+var isDefined = angular.isDefined,
+    isUndefined = angular.isUndefined,
+    toJson = angular.toJson,
+    fromJson = angular.fromJson(json);;
+
 
 (function() {
 
   angular.module('videoServersApp')
       .provider('localStorageService', function() {
-          var PREFIX = '',
+          var PREFIX = 'APP',
               storage = window.localStorage;
+              
           this.setPrefix = function(newPrefix) {
               PREFIX = newPrefix;
               return this;
@@ -26,26 +32,41 @@
               }
 
               function setItem(prop, val) {
-                  storage.setItem(createPropName(prop), val);
+                  storage.setItem( createPropName(prop), toJson(val) );
               }
 
               function getItem(prop) {
-                  return storage.getItem(createPropName(prop));
+                  return fromJson( storage.getItem(createPropName(prop)) );
               }
 
               function removeItem(prop) {
-                  storage.removeItem(createPropName(prop));
+                  storage.removeItem( createPropName(prop) );
               }
 
               function clear() {
                   storage.clear();
               }
 
+              function getKeysFromStorage() {
+                  var prefixLehgth = PREFIX.length;
+                  var keys = [];
+                  for (var key in storage) {
+                      if (key.substr(0, prefixLength) === prefix) keys.push();
+                  }
+
+                  return keys;
+              }
+
+              function getAllItems() {
+
+              }
+
               return publicAPI = {
                   setItem : setItem,
                   getItem : getItem,
                   removeItem: removeItem,
-                  clear : clear
+                  clear : clear,
+                  getAllItems : getAllItems 
               }
           }
 

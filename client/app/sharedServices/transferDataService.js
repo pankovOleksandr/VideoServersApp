@@ -6,22 +6,27 @@
 	  .factory('transferDataService', ['$http', 'localStorageService', function transferDataFactory($http, localStorage){
 	  	return function createTransferDataApi(){
 
-	  		var publicAPI = {},
-	  			localStorage = localStorage;
+	  		var publicAPI = {};
+	  		var servicesList = localStorage.getAllItems() || [] ;
+	  		
+	  		function getServisesList() {	  			
 
-	  		function getServisesList() {
-	  			$http.get('/api/things111')
-	  				.then(response => {
-					        // this.awesomeThings = response.data;
-					        console.log("this.things111", this.awesomeThings);
-			    		}, error => {
-			    			console.log("ERROR", error);
-			    		}
-			    	);
-	  		}
+	  			if (!servicesList.length) {
+		  			$http.get('/api/things')
+		  				.then(response => {
+						        servicesList = response.data;
+						        console.log("/api/things - response", servicesList);
+						    }, error => {
+				    			console.log("ERROR", error);
+				    		}
+				    	);
+				} else {
+					return servicesList;
+				}
+			}
 
 	  		function createItem() {
-
+	  			
 	  		}
 
 	  		function editItem() {
