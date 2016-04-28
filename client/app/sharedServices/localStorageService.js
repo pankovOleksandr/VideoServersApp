@@ -3,7 +3,7 @@
 (function() {
 
   angular.module('videoServersApp')
-      .provider('localStorageServer', function() {
+      .provider('localStorageService', function() {
           var PREFIX = '',
               storage = window.localStorage;
           this.setPrefix = function(newPrefix) {
