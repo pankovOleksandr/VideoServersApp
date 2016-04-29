@@ -9,9 +9,9 @@ var isDefined = angular.isDefined,
 
   angular.module('videoServersApp')
       .provider('localStorageService', function() {
-          var PREFIX = 'APP',
+          var PREFIX = 'Harmonic',
               storage = window.localStorage;
-              
+
           this.setPrefix = function(newPrefix) {
               PREFIX = newPrefix;
               return this;
@@ -26,6 +26,7 @@ var isDefined = angular.isDefined,
 
           this.$get = function localStorageFactory() {
               var publicAPI = {};
+
 
               function createPropName(prop) {
                   return PREFIX + prop;
@@ -47,15 +48,14 @@ var isDefined = angular.isDefined,
                   storage.clear();
               }
 
-              function getKeysFromStorage() {
-                  var prefixLehgth = PREFIX.length;
-                  var keys = [];
-                  for (var key in storage) {
-                      if (key.substr(0, prefixLength) === prefix) keys.push();
-                  }
-
-                  return keys;
-              }
+              // function getKeysFromStorage() {
+              //     var prefixLehgth = PREFIX.length;
+              //     var keys = [];
+              //     for (var key in storage) {
+              //         if (key.substr(0, prefixLength) === prefix) keys.push();
+              //     }
+              //     return keys;
+              // }
 
               function getAllItems() {
 
@@ -66,9 +66,10 @@ var isDefined = angular.isDefined,
                   getItem : getItem,
                   removeItem: removeItem,
                   clear : clear,
-                  getAllItems : getAllItems 
+                  getServers : getAllItems,
+                  getVersions : getVersions
               }
-          }
+          }]
 
     });
 

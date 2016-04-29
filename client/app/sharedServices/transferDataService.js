@@ -3,38 +3,45 @@
 (function () {
 
 	angular.module('videoServersApp')
-	  .factory('transferDataService', ['$http', 'localStorageService', function transferDataFactory($http, localStorage){
+	  .factory('transferDataService', ['defaultData', 'localStorageService', function transferDataFactory(defaultData, localStorage){
 	  	return function createTransferDataApi(){
 
-	  		var publicAPI = {};
-	  		var servicesList = localStorage.getAllItems() || [] ;
-	  		
-	  		function getServisesList() {	  			
+	  		var publicAPI = {},
+            servers = localStorage.getServers() || defaultData.getServers() || [],
+            versions = localStorage.getVersions() || defaultData.getVersions() || [];
+        
+        function init() {
+          if (servers.length == 0 || versions.length == 0) {
+            throw new Error('!!! Empty servers list or version list default values ')
+          }
+        }
 
-	  			if (!servicesList.length) {
-		  			$http.get('/api/things')
-		  				.then(response => {
-						        servicesList = response.data;
-						        console.log("/api/things - response", servicesList);
-						    }, error => {
-				    			console.log("ERROR", error);
-				    		}
-				    	);
-				} else {
-					return servicesList;
-				}
+	  		function getServisesList() {
+
+	  			// if (!servicesList.length) {
+		  		// 	$http.get('/api/things')
+		  		// 		.then(response => {
+					// 	        servicesList = response.data;
+					// 	        console.log("/api/things - response", servicesList);
+					// 	    }, error => {
+				  //   			console.log("ERROR", error);
+				  //   		}
+				  //   	);
+				  // } else {
+					//   return servicesList;
+				  // }
 			}
 
 	  		function createItem() {
-	  			
+
 	  		}
 
 	  		function editItem() {
-	  			
+
 	  		}
 
 	  		function deleteItem() {
-	  			
+
 	  		}
 
 

@@ -4,9 +4,9 @@
 
 class MainController {
 
-  constructor($http, transferDataService, $scope) {
-    this.$http = $http;
-    this.awesomeThings = [];
+  constructor(transferDataService, $scope) {
+    
+    this.services = [];
     console.log("transferDataService", transferDataService);
     this.transferDataService = transferDataService();
     $scope.watchCollection(this.awesomeThings, fucntion() {
@@ -20,8 +20,8 @@ class MainController {
     //   console.log("this.things", this.awesomeThings);
     // });
     console.log("INIT CONTROLLER");
-    this.awesomeThings = this.transferDataService.getServisesList();
-    console.log('awesomeThings', this.awesomeThings);
+    this.services = this.transferDataService.getServisesList();
+    console.log('awesomeThings', this.services);
 
   }
 }
