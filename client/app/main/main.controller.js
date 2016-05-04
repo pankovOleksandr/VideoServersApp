@@ -9,9 +9,9 @@ class MainController {
     this.services = [];
     console.log("transferDataService", transferDataService);
     this.transferDataService = transferDataService();
-    $scope.watchCollection(this.awesomeThings, fucntion() {
+    $scope.watchCollection(this.awesomeThings, function() {
         console.log("In watch");
-    })
+    });
   }
 
   $onInit() {

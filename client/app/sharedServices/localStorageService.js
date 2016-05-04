@@ -69,7 +69,7 @@ var isDefined = angular.isDefined,
                   getServers : getAllItems,
                   getVersions : getVersions
               }
-          }]
+          }
 
     });
 
