@@ -11,9 +11,10 @@ describe('Main View', function() {
   });
 
   it('should include jumbotron with correct data', function() {
-    expect(page.h1El.getText()).toBe('Hello, I\'m glad to see you!');
-    expect(page.p.getText()).toBe('Hello, I\'m glad to see you!');    
+    expect(page.h1El.getText()).toBe('Spectrum Video Servers');
     expect(page.imgEl.getAttribute('src')).toMatch(/harmonic-logo-2.png$/);
-    expect(page.imgEl.getAttribute('alt')).toBe('It\'s a simple AngularJS CRUD application "Spectrum Video Servers"');
+    expect(page.imgEl.getAttribute('alt')).toBe('Harmonic logo');
+    expect(page.p.getText()).toBe('It\'s a simple AngularJS CRUD application');
+    
   });
 });

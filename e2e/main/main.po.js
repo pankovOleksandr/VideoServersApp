@@ -6,9 +6,10 @@
 'use strict';
 
 var MainPage = function() {
-  this.heroEl = element(by.css('.hero-unit'));
-  this.h1El = this.heroEl.element(by.css('h1'));
-  this.imgEl = this.heroEl.element(by.css('img'));
+  this.harmonicEl = element(by.css('.hero-unit'));
+  this.h1El = this.harmonicEl.element(by.css('h1'));
+  this.imgEl = this.harmonicEl.element(by.css('img'));
+  this.p = this.harmonicEl.element(by.css('.lead'));
 };
 
 module.exports = new MainPage();
