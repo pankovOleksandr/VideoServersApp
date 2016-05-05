@@ -12,24 +12,35 @@
 
 <div class="container">
   <div class="row">
-  	<div class="col-sm-8">
-	    <table class="table">
+  	<div class="col-sm-10 table-responsive">
+	    <table class="table table-hover table-bordered">
 		  <caption><h3>Spectrum Video Servers</h3></caption>
 	      <tr>
 	      	<th>#</th>
 	      	<th>IP</th>
 	      	<th>Name</th>
 	      	<th>Current Version</th>
+          <th>Actions</th>
 	      </tr>
-        <tr ng-repeat="server in servers">
-
+        <tr ng-repeat="server in main.servers">
+          <td>{{$index+1}}</td>
+          <td>{{server.ip}}</td>
+          <td>{{server.name}}</td>
+          <td>{{server.currentVersion}}</td>
+          <td>
+            <div>
+            <div class="btn-group" role="group" aria-label="CRUD buttons">
+              <button type="button" class="btn btn-primary">Create</button>
+              <button type="button" class="btn btn-primary">Edit</button>
+              <button type="button" class="btn btn-primary">Update version</button>
+              <button type="button" class="btn btn-danger">Delete</button>
+            </div>
+            </div>
+          </td>
         </tr>
 	    </table>
     </div>
-  	<div class="col-sm-3 col-sm-offset-1 button-group">
-  		<button type="button" class="btn btn-primary btn-block">Create</button>
-  		<button type="button" class="btn btn-primary btn-block">Edit</button>
-  		<button type="button" class="btn btn-primary btn-block">Update version</button>
+  	<div class="col-sm-2">
   		<button type="button" class="btn btn-primary btn-block">Restart</button>
   	</div>
   </div>
