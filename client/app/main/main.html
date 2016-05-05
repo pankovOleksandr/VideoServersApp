@@ -22,25 +22,31 @@
 	      	<th>Current Version</th>
           <th>Actions</th>
 	      </tr>
+        <tr ng-show="main.modeStates.isCreate">
+          <td></td>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+          <td><input type="text"></td>
+          <td>
+              <button type="button" class="btn btn-primary" ng-click="">Save</button>
+              <button type="button" class="btn btn-primary">Cancel</button>
+          </td>
+        </tr>
         <tr ng-repeat="server in main.servers">
           <td>{{$index+1}}</td>
           <td>{{server.ip}}</td>
           <td>{{server.name}}</td>
           <td>{{server.currentVersion}}</td>
           <td>
-            <div>
-            <div class="btn-group" role="group" aria-label="CRUD buttons">
-              <button type="button" class="btn btn-primary">Create</button>
               <button type="button" class="btn btn-primary">Edit</button>
               <button type="button" class="btn btn-primary">Update version</button>
               <button type="button" class="btn btn-danger">Delete</button>
-            </div>
-            </div>
           </td>
         </tr>
 	    </table>
     </div>
   	<div class="col-sm-2">
+      <button type="button" class="btn btn-primary btn-block" ng-click="main.create()">Create</button>
   		<button type="button" class="btn btn-primary btn-block">Restart</button>
   	</div>
   </div>

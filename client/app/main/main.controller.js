@@ -4,11 +4,15 @@
 
 class MainController {
 
-  constructor(transferDataService, $scope) {
+  constructor(transferDataService) {
 
     this.servers = [];
     this.transferDataService = transferDataService();
-    this.test = "test";
+    this.modeStates = {
+      isCreate: false,
+      isEdit : false
+    }
+
   }
 
   $onInit() {
@@ -17,6 +21,11 @@ class MainController {
     this.servers = this.transferDataService.getServisesList();
     console.log('this', this);
 
+  }
+
+  create() {
+    console.log("create method");
+    this.modeStates.isCreate = true;
   }
 }
 //   function MainController() {
