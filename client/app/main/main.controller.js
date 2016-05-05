@@ -11,21 +11,30 @@ class MainController {
     this.modeStates = {
       isCreate: false,
       isEdit : false
-    }
+    };
+    this.newItem = {};
 
   }
 
   $onInit() {
 
     console.log("INIT CONTROLLER");
-    this.servers = this.transferDataService.getServisesList();
+    this.servers = this.transferDataService.getServersList();
     console.log('this', this);
 
   }
 
   create() {
-    console.log("create method");
     this.modeStates.isCreate = true;
+  }
+
+  save(newItem) {
+    if (this.modeStates.isCreate) {
+      this.transferDataService.createServerItem(newItem);
+      this.modeStates.isCreate = false;
+      this.newItem = {};
+    }
+    
   }
 }
 //   function MainController() {
