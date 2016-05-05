@@ -5,13 +5,9 @@
 class MainController {
 
   constructor(transferDataService, $scope) {
-    
+
     this.services = [];
-    console.log("transferDataService", transferDataService);
     this.transferDataService = transferDataService();
-    $scope.watchCollection( this.transferDataService, function() {
-        console.log("In watch");
-    } );
   }
 
   $onInit() {

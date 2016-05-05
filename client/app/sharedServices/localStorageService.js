@@ -2,7 +2,7 @@
 var isDefined = angular.isDefined,
     isUndefined = angular.isUndefined,
     toJson = angular.toJson,
-    fromJson = angular.fromJson(json);;
+    fromJson = angular.fromJson();
 
 
 (function() {
@@ -58,6 +58,10 @@ var isDefined = angular.isDefined,
               // }
 
               function getAllItems() {
+
+              }
+
+              function getVersions() {
 
               }
 
