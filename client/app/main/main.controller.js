@@ -52,6 +52,11 @@ class MainController {
     this.modeStates.isEdit = true;
   }
 
+  delete(item) {
+    console.log(item);
+    // this.transferDataService.
+  }
+
 }
 //   function MainController() {
 //     this.test = "test";
