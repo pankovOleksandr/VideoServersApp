@@ -10,7 +10,7 @@ class MainController {
     this.transferDataService = transferDataService();
     this.modeStates = {
       isCreate: false,
-      isEdit : false
+      isEdit : {}
     };
     this.newItem = {};
 
@@ -28,14 +28,30 @@ class MainController {
     this.modeStates.isCreate = true;
   }
 
-  save(newItem) {
-    if (this.modeStates.isCreate) {
-      this.transferDataService.createServerItem(newItem);
-      this.modeStates.isCreate = false;
-      this.newItem = {};
+  createActions($event, newItem) {
+    var btnType = $event.currentTarget.innerHTML;
+    switch (btnType) {
+      case "Create":
+        if (newItem.ip || newItem.name || newItem.currentVersion) {
+          this.transferDataService.createServerItem(newItem);
+          this.modeStates.isCreate = false;
+          this.newItem = {};
+        } else {
+          alert('Empty new object');
+        }
+        break;
+
+      case "Cancel":
+        this.modeStates.isCreate = false;
+        this.newItem = {};
+        break;
     }
-    
   }
+
+  edit() {
+    this.modeStates.isEdit = true;
+  }
+
 }
 //   function MainController() {
 //     this.test = "test";

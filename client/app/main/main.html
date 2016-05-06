@@ -24,12 +24,12 @@
 	      </tr>
         <tr ng-show="main.modeStates.isCreate">
           <td></td>
-          <td><input type="text" ng-model="main.newItem.ip" placeholder="xx.xx.xxx.xxx" mask="00.00.000.000"></td>
+          <td><input type="text" ng-model="main.newItem.ip" placeholder="xx.xx.xxx.xxx" ng-focus="main.modeStates.isCreate"></td>
           <td><input type="text" ng-model="main.newItem.name" placeholder="name" ng-required></td>
-          <td><input type="text" ng-model="main.newItem.currentVersion" placeholder="xxx.xx.xx.xx" mask="000.00.00.00" ng-required></td>
+          <td><input type="text" ng-model="main.newItem.currentVersion" placeholder="xxx.xx.xx.xx"></td>
           <td>
-              <button type="button" class="btn btn-primary" ng-click="main.save(main.newItem)">Save</button>
-              <button type="button" class="btn btn-primary">Cancel</button>
+              <button type="button" class="btn btn-primary" ng-click="main.createActions($event, main.newItem)">Create</button>
+              <button type="button" class="btn btn-primary" ng-click="main.createActions($event, main.newItem)">Cancel</button>
           </td>
         </tr>
         <tr ng-repeat="server in main.servers">
