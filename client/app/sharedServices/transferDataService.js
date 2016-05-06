@@ -32,15 +32,16 @@
 
 	  		function createItem(newItem) {
 	  			servers.unshift(newItem);
-	  			console.log("server.unshit ", newItem);
 	  		}
 
 	  		function editItem() {
 
 	  		}
 
-	  		function deleteItem() {
-          servers.filter()
+	  		function deleteItem(item) {
+          let index = servers.indexOf(item);
+          servers.splice(index,1);
+          console.log(servers);
 	  		}
 
         init();

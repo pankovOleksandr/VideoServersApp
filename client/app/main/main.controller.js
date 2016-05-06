@@ -48,13 +48,21 @@ class MainController {
     }
   }
 
-  edit() {
-    this.modeStates.isEdit = true;
+  editStart(i, item) {
+    for (var key in this.modeStates.isEdit) {
+      if (this.modeStates.isEdit.hasOwnProperty(key)) delete this.modeStates.isEdit[key];
+    };
+    this.modeStates.isEdit[i] = true;
   }
 
-  delete(item) {
-    console.log(item);
-    // this.transferDataService.
+  editCancel() {
+
+  }
+
+  delete(item, $index) {
+    this.transferDataService.deleteServiceItem(item);
+    console.log('index', $index);
+    this.modeStates.isEdit[$index] = null;
   }
 
 }
