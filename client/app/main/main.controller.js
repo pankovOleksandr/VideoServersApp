@@ -81,6 +81,15 @@ class MainController {
     item[prop] = value;
     this.transferDataService.editServiceItem(item);
   }
+  /** function used for filter's select
+   */
+  getUsedVersion() {
+    var usedVersions = [];
+    for (var i=0; i<this.servers.length; i++) {
+      usedVersions.push( this.servers[i].currentVersion );
+    }
+    return usedVersions;
+  }
 }
 
 angular.module('videoServersApp')

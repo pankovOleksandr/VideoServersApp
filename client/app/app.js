@@ -6,7 +6,8 @@ angular.module('videoServersApp', [
   'ngResource',
   'ngSanitize',
   'ngRoute',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'videoServersApp.filters'
 ])
   .config(function($routeProvider, $locationProvider) {
     $routeProvider
