@@ -13,6 +13,7 @@ class MainController {
       isEdit : {}
     };
     this.newItem = {};
+    this.serverCopy = {};
 
   }
 
@@ -20,7 +21,6 @@ class MainController {
 
     console.log("INIT CONTROLLER");
     this.servers = this.transferDataService.getServersList();
-    console.log('this', this);
 
   }
 
@@ -48,20 +48,29 @@ class MainController {
     }
   }
 
-  editStart(i, item) {
+  handleEdit(item, $index) {
+
+    if (this.modeStates.isEdit[$index]) {
+      this.transferDataService.editServiceItem(item);
+      this.modeStates.isEdit[$index] = null;
+      return;
+    }
+
     for (var key in this.modeStates.isEdit) {
       if (this.modeStates.isEdit.hasOwnProperty(key)) delete this.modeStates.isEdit[key];
     };
-    this.modeStates.isEdit[i] = true;
+
+    angular.copy(item, this.serverCopy);
+    this.modeStates.isEdit[$index] = true;
   }
 
-  editCancel() {
-
+  reset(item, $index) {
+    this.transferDataService.editServiceItem(this.serverCopy);
+    this.modeStates.isEdit[$index] = null;
   }
 
   delete(item, $index) {
     this.transferDataService.deleteServiceItem(item);
-    console.log('index', $index);
     this.modeStates.isEdit[$index] = null;
   }
 

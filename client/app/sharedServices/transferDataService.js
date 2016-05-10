@@ -34,14 +34,15 @@
 	  			servers.unshift(newItem);
 	  		}
 
-	  		function editItem() {
-
+	  		function editItem(item) {
+          console.log('edit item', item);
+          let index = servers.indexOf(item);
+          servers[index] = item;
 	  		}
 
 	  		function deleteItem(item) {
           let index = servers.indexOf(item);
           servers.splice(index,1);
-          console.log(servers);
 	  		}
 
         init();

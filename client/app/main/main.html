@@ -37,8 +37,8 @@
           </td>
         </tr>
         <tr ng-repeat="server in main.servers">
-          <td ng-hide="main.modeStates.isEdit[$index]">{{$index+1}}</td>
-          <td ng-show="main.modeStates.isEdit[$index]">{{$index+1}}</td>
+          <td>{{$index+1}}</td>
+          <!--<td ng-show="main.modeStates.isEdit[$index]">{{$index+1}}</td>-->
 
           <td ng-hide="main.modeStates.isEdit[$index]">{{server.ip}}</td>
           <td ng-show="main.modeStates.isEdit[$index]"><input type="text" ng-model="server.ip"></td>
@@ -50,8 +50,8 @@
           <td ng-show="main.modeStates.isEdit[$index]"><input type="text" ng-model="server.currentVersion"></td>
 
           <td>
-              <button type="button" class="btn btn-primary" ng-click="main.editStart($index, server)">{{(main.modeStates.isEdit[$index])? "Save" : "Edit"}}</button>
-              <button type="button" class="btn btn-warning" ng-show="main.modeStates.isEdit[$index]" ng-click="main.editCancel">Cancel</button>
+              <button type="button" class="btn btn-primary" ng-click="main.handleEdit(server, $index)">{{(main.modeStates.isEdit[$index])? "Save" : "Edit"}}</button>
+              <button type="button" class="btn btn-warning" ng-show="main.modeStates.isEdit[$index]" ng-click="main.reset(server, $index)">Reset</button>
               <button type="button" class="btn btn-primary" ng-hide="main.modeStates.isEdit[$index]">Update version</button>
               <button type="button" class="btn btn-danger" ng-click="main.delete(server, $index)">Delete</button>
           </td>
