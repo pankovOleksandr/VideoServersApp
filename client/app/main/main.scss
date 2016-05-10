@@ -36,4 +36,20 @@
   padding-top: 50px;
 }
 
-
+.table {
+  th, tr {
+    width: 21%;
+  }
+  th:first-of-type, tr:first-of-type {
+    width: 7%;
+  }
+  th:last-of-type, tr:last-of-type {
+    width: 30%;
+  }
+  .btn {
+    width: 44%;
+    &:first-of-type, &:last-of-type {
+      width: 26%;
+    }
+  }
+}
