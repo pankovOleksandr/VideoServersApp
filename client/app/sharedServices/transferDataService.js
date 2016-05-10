@@ -44,6 +44,10 @@
           let index = servers.indexOf(item);
           servers.splice(index,1);
 	  		}
+        
+        function getVersions() {
+          return versions;
+        }
 
         init();
 
@@ -51,7 +55,8 @@
 	  			getServersList : getServersList,
 	  			createServerItem : createItem,
 	  			editServiceItem : editItem,
-	  			deleteServiceItem : deleteItem
+	  			deleteServiceItem : deleteItem,
+          getAllVersions : getVersions
 	  		}
 	  	};
 	  }])

@@ -7,6 +7,7 @@ class MainController {
   constructor(transferDataService) {
 
     this.servers = [];
+    this.versions = [];
     this.transferDataService = transferDataService();
     this.modeStates = {
       isCreate: false,
@@ -21,6 +22,7 @@ class MainController {
 
     console.log("INIT CONTROLLER");
     this.servers = this.transferDataService.getServersList();
+    this.versions = this.transferDataService.getAllVersions();
 
   }
 
@@ -74,10 +76,12 @@ class MainController {
     this.modeStates.isEdit[$index] = null;
   }
 
+  updateField(item, prop, value) {
+    console.log('in updateField');
+    item[prop] = value;
+    this.transferDataService.editServiceItem(item);
+  }
 }
-//   function MainController() {
-//     this.test = "test";
-//   }
 
 angular.module('videoServersApp')
   .component('main', {

@@ -50,9 +50,9 @@
           <td ng-show="main.modeStates.isEdit[$index]"><input type="text" ng-model="server.currentVersion"></td>
 
           <td>
-              <button type="button" class="btn btn-primary" ng-click="main.handleEdit(server, $index)">{{(main.modeStates.isEdit[$index])? "Save" : "Edit"}}</button>
-              <button type="button" class="btn btn-warning" ng-show="main.modeStates.isEdit[$index]" ng-click="main.reset(server, $index)">Reset</button>
-              <button type="button" class="btn btn-primary" ng-hide="main.modeStates.isEdit[$index]">Update version</button>
+              <button type="button" ng-class="(main.modeStates.isEdit[$index])? 'btn btn-success' : 'btn btn-primary'" ng-click="main.handleEdit(server, $index)">{{(main.modeStates.isEdit[$index])? "Save" : "Edit"}}</button>
+              <button type="button" class="btn btn-warning" ng-if="main.modeStates.isEdit[$index]" ng-click="main.reset(server, $index)">Reset</button>
+              <hm-update-version ng-hide="main.modeStates.isEdit[$index]" on-update="main.updateField(server, 'currentVersion', value)" versions="main.versions"></hm-update-version>
               <button type="button" class="btn btn-danger" ng-click="main.delete(server, $index)">Delete</button>
           </td>
         </tr>
