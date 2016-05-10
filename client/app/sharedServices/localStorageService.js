@@ -1,15 +1,8 @@
-'use strict';
-var isDefined = angular.isDefined,
-    isUndefined = angular.isUndefined,
-    toJson = angular.toJson,
-    fromJson = angular.fromJson();
-
-
-(function() {
-
-  angular.module('videoServersApp')
+angular.module('videoServersApp')
       .provider('localStorageService', function() {
-          var PREFIX = 'Harmonic',
+        'use strict';
+
+        var PREFIX = 'Harmonic',
               storage = window.localStorage;
 
           this.setPrefix = function(newPrefix) {
@@ -77,4 +70,3 @@ var isDefined = angular.isDefined,
 
     });
 
-})();
