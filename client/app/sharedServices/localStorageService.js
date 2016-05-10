@@ -26,11 +26,11 @@ angular.module('videoServersApp')
               }
 
               function setItem(prop, val) {
-                  storage.setItem( createPropName(prop), toJson(val) );
+                  storage.setItem( createPropName(prop), angular.toJson(val) );
               }
 
               function getItem(prop) {
-                  return fromJson( storage.getItem(createPropName(prop)) );
+                  return angular.fromJson( storage.getItem(createPropName(prop)) );
               }
 
               function removeItem(prop) {
@@ -41,30 +41,11 @@ angular.module('videoServersApp')
                   storage.clear();
               }
 
-              // function getKeysFromStorage() {
-              //     var prefixLehgth = PREFIX.length;
-              //     var keys = [];
-              //     for (var key in storage) {
-              //         if (key.substr(0, prefixLength) === prefix) keys.push();
-              //     }
-              //     return keys;
-              // }
-
-              function getAllItems() {
-
-              }
-
-              function getVersions() {
-
-              }
-
               return publicAPI = {
-                  setItem : setItem,
-                  getItem : getItem,
-                  removeItem: removeItem,
-                  clear : clear,
-                  getServers : getAllItems,
-                  getVersions : getVersions
+                  saveToLocalStorage : setItem,
+                  getFromLocalStorage : getItem,
+                  removeFromLocalStorage: removeItem,
+                  clearLocalStorage : clear
               }
           }
 

@@ -3,21 +3,24 @@
 (function () {
 
 	angular.module('videoServersApp')
-	  .factory('transferDataService', ['defaultData', 'localStorageService', function transferDataFactory(defaultData, localStorage){
+	  .factory('transferDataFactory', ['defaultData', 'localStorageService', function transferDataFactory(defaultData, localStorage){
 	  	return function createTransferDataApi(){
 
 	  		var publicAPI = {},
-            servers = localStorage.getServers() || defaultData.getServers() || [],
-            versions = localStorage.getVersions() || defaultData.getVersions() || [];
+            servers = localStorage.getFromLocalStorage('servers') || defaultData.getServers() || [],
+            versions = localStorage.getFromLocalStorage('versions') || defaultData.getVersions() || [];
 
         function init() {
           if (servers.length == 0 || versions.length == 0) {
-            throw new Error('!!! Empty servers list or version list default values ');
+            throw new Error('!!! Empty servers list or versions list default values ');
           } else {
             servers.forEach(function(el, i) {
               if (el._id) return;
               el._id = createID();
-            })
+            });
+
+            localStorage.saveToLocalStorage('servers', servers);
+            localStorage.saveToLocalStorage('versions', versions);
           }
         }
 
@@ -27,7 +30,7 @@
         }
 
         function getServersList() {
-	  			return servers;
+	  			return localStorage.getFromLocalStorage('servers');
 			  }
 
 	  		function createItem(newItem) {
@@ -35,7 +38,6 @@
 	  		}
 
 	  		function editItem(item) {
-          console.log('edit item', item);
           let index = servers.indexOf(item);
           servers[index] = item;
 	  		}
@@ -43,10 +45,11 @@
 	  		function deleteItem(item) {
           let index = servers.indexOf(item);
           servers.splice(index,1);
+
 	  		}
         
         function getVersions() {
-          return versions;
+          return localStorage.getFromLocalStorage('versions');
         }
 
         init();
