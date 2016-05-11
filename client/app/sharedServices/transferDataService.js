@@ -3,11 +3,15 @@
 (function () {
 
 	angular.module('videoServersApp')
-	  .factory('transferDataFactory', ['defaultData', 'localStorageService', function transferDataFactory(defaultData, localStorage){
+	  .factory('transferDataFactory', ['defaultData', 'localStorageService', '$http', '$rootScope', function transferDataFactory(defaultData,
+                                                                                                                               localStorage,
+                                                                                                                               $http,
+                                                                                                                               $rootScope){
 	  	return function createTransferDataApi(){
 
 	  		var publicAPI = {},
             servers = localStorage.getFromLocalStorage('servers') || defaultData.getServers() || [],
+            // servers =  defaultData.getServers() || [],
             versions = localStorage.getFromLocalStorage('versions') || defaultData.getVersions() || [];
 
         function init() {
@@ -61,7 +65,7 @@
               arr[i] = item;
             };
           });
-          localStorage.saveToLocalStorage('servers', servers);          
+          localStorage.saveToLocalStorage('servers', servers);
 	  		}
 
 	  		function deleteItem(item) {
@@ -79,6 +83,16 @@
           return versions;
         }
 
+        function restart() {
+          $http.get('/api/things').then(
+            function(res) {
+              servers = res.data;
+              init();
+              $rootScope.$broadcast('transferData: dataRefreshed');
+            }
+          )
+        }
+
         init();
 
 	  		return publicAPI = {
@@ -86,7 +100,8 @@
 	  			createServerItem : createItem,
 	  			editServiceItem : editItem,
 	  			deleteServiceItem : deleteItem,
-          getVersions : getVersions
+          getVersions : getVersions,
+          getInitialValues: restart
 	  		}
 	  	};
 	  }])

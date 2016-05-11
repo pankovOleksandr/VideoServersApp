@@ -4,8 +4,7 @@
 
 class MainController {
 
-  constructor(transferDataFactory) {
-
+  constructor(transferDataFactory, $scope) {
     this.servers = [];
     this.versions = [];
     this.transferDataFactory = transferDataFactory();
@@ -14,12 +13,17 @@ class MainController {
       isEdit : {}
     };
     this.newItem = {};
+    this.filterValue = '';
 
+    $scope.$on('transferData: dataRefreshed', this.onDataRefresh.bind(this));
+  }
+
+  onDataRefresh() {
+    this.servers = this.getServers();
   }
 
   $onInit() {
 
-    console.log("INIT CONTROLLER");
     this.servers = this.getServers();
     this.versions = this.getVersions();
 
@@ -93,6 +97,11 @@ class MainController {
     }
     return usedVersions;
   }
+
+  handleRestart() {
+    this.transferDataFactory.getInitialValues();
+  }
+
 }
 
 angular.module('videoServersApp')
