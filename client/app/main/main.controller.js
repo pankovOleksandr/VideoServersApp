@@ -21,34 +21,41 @@ class MainController {
   $onInit() {
 
     console.log("INIT CONTROLLER");
-    this.servers = this.transferDataFactory.getServersList();
-    this.versions = this.transferDataFactory.getAllVersions();
+    this.servers = this.getServers();
+    this.versions = this.getVersions();
 
   }
 
-  create() {
+  getServers() {
+    return angular.copy(this.transferDataFactory.getServersList());
+  }
+
+  getVersions() {
+    return angular.copy(this.transferDataFactory.getVersions());
+  }
+
+  handleCreate() {
     this.modeStates.isCreate = true;
   }
 
-  createActions($event, newItem) {
-    var btnType = $event.currentTarget.innerHTML;
-    switch (btnType) {
-      case "Create":
-        if (newItem.ip || newItem.name || newItem.currentVersion) {
-          this.transferDataFactory.createServerItem(newItem);
-          this.modeStates.isCreate = false;
-          this.newItem = {};
-        } else {
-          alert('Empty new object');
-        }
-        break;
-
-      case "Cancel":
-        this.modeStates.isCreate = false;
-        this.newItem = {};
-        break;
+  createItem(newItem) {
+    if (newItem.ip || newItem.name || newItem.currentVersion) {
+      this.transferDataFactory.createServerItem(newItem);
+      this.modeStates.isCreate = false;
+      this.newItem = {};
+      this.servers = this.getServers();
+    } else {
+      alert('Empty new object');
     }
   }
+  // createActions($event, newItem) {
+  //
+  //     case "Cancel":
+  //       this.modeStates.isCreate = false;
+  //       this.newItem = {};
+  //       break;
+  //   }
+  // }
 
   handleEdit(item, $index) {
 

@@ -24,6 +24,7 @@
           }
         }
 
+
         function findMaxID(arr) {
           var maxID = 0;
           arr.forEach(function(el) {
@@ -42,12 +43,18 @@
         }
 
         function getServersList() {
-	  			return localStorage.getFromLocalStorage('servers');
+          var temp = localStorage.getFromLocalStorage('servers');
+          if (temp) {
+            servers = temp;
+          }
+	  			return servers;
 			  }
 
 	  		function createItem(newItem) {
           createID(newItem);
 	  			servers.unshift(newItem);
+          localStorage.saveToLocalStorage('servers', servers);
+
           console.log(servers);
 	  		}
 
@@ -64,7 +71,11 @@
 	  		}
 
         function getVersions() {
-          return localStorage.getFromLocalStorage('versions');
+          var temp = localStorage.getFromLocalStorage('versions');
+          if (temp) {
+            versions = temp;
+          }
+          return versions;
         }
 
         init();
@@ -74,7 +85,7 @@
 	  			createServerItem : createItem,
 	  			editServiceItem : editItem,
 	  			deleteServiceItem : deleteItem,
-          getAllVersions : getVersions
+          getVersions : getVersions
 	  		}
 	  	};
 	  }])
