@@ -17,14 +17,10 @@
       <button type="button" class="btn btn-primary btn-block" ng-click="main.handleRestart()">Restart</button>
       <br/>
       <br/>
-      <div class="filter-block row">
-        <div class="col-xs-6">
-          <label>Choose version:  <select ng-model="main.filterValue" ng-options="version for version in main.getUsedVersion()"></select></label>
-        </div>
-        <div class="col-xs-6">
-          <label>Use for enable filter:  <input type="checkbox" ng-model="main.filerFlag"></label>
-        </div>
+      <div>
+        <label>Choose version:  <select ng-model="main.filterValue" ng-options="version for version in main.getUsedVersion()"></select></label>
       </div>
+
 
     </div>
   	<div class="col-sm-12 table-responsive">
@@ -47,7 +43,7 @@
               <button type="button" class="btn btn-warning" ng-click="main.cancelCreating()">Cancel</button>
           </td>
         </tr>
-        <tr ng-repeat="server in main.servers | versionFilter : main.filterValue : main.filerFlag ">
+        <tr ng-repeat="server in main.servers | versionFilter : main.filterValue">
           <td>{{$index+1}}</td>
 
           <td ng-hide="main.modeStates.isEdit[$index]">{{server.ip}}</td>

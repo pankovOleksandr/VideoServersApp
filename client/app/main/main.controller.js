@@ -13,7 +13,7 @@ class MainController {
       isEdit : {}
     };
     this.newItem = {};
-    this.filterValue = '';
+    this.filterValue = 'All';
     this.serverItemCopy = {};
 
     $scope.$on('transferData: dataRefreshed', this.onDataRefresh.bind(this));
@@ -67,7 +67,7 @@ class MainController {
     for (var key in this.modeStates.isEdit) {
       if (this.modeStates.isEdit.hasOwnProperty(key)) delete this.modeStates.isEdit[key];
     };
-    
+
     this.serverItemCopy = angular.copy(item);
     this.modeStates.isEdit[$index] = true;
   }
@@ -98,7 +98,7 @@ class MainController {
   /** function used for filter's select
    */
   getUsedVersion() {
-    var usedVersions = [];
+    var usedVersions = ['All'];
     for (var i=0; i<this.servers.length; i++) {
       usedVersions.push( this.servers[i].currentVersion );
     }

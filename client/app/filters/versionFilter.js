@@ -7,10 +7,10 @@
 (function(angular) {
   angular.module('videoServersApp.filters', [])
     .filter('versionFilter', function createVersionFilter() {
-      return function(items, version, flag) {
-        if (!flag) {
+      return function(items, version) {
+        if (version === 'All' ) {
           return items;
-        } 
+        }
         return items.filter(function(item) {
           return item.currentVersion === version;
         });

@@ -26,8 +26,8 @@ describe('versionFilter', function() {
 
     it('should return only satisfied values',
       inject(function(versionFilterFilter) {
-        expect(versionFilterFilter(randomServices, "941.52.80.21" , true)[0].currentVersion).toBe("941.52.80.21");
-        expect(versionFilterFilter(randomServices, "941.52.80.21", false).length).toBe(3);
+        expect(versionFilterFilter(randomServices, "941.52.80.21")[0].currentVersion).toBe("941.52.80.21");
+        expect(versionFilterFilter(randomServices, "All").length).toBe(3);
       }));
   });
 });
