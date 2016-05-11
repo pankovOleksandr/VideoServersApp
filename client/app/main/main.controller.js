@@ -14,6 +14,7 @@ class MainController {
     };
     this.newItem = {};
     this.filterValue = '';
+    this.serverItemCopy = {};
 
     $scope.$on('transferData: dataRefreshed', this.onDataRefresh.bind(this));
   }
@@ -58,11 +59,16 @@ class MainController {
   }
 
   handleEdit(item, $index) {
+    if (this.serverItemCopy) {
+      this.servers = this.getServers();
+      this.serverItemCopy = {};
+    }
 
     for (var key in this.modeStates.isEdit) {
       if (this.modeStates.isEdit.hasOwnProperty(key)) delete this.modeStates.isEdit[key];
     };
-
+    
+    this.serverItemCopy = angular.copy(item);
     this.modeStates.isEdit[$index] = true;
   }
 
@@ -70,6 +76,7 @@ class MainController {
     this.transferDataFactory.editServiceItem(item);
     this.modeStates.isEdit[$index] = false;
     this.servers = this.getServers();
+    this.serverItemCopy = {};
   }
 
   resetEdit(item, $index) {
