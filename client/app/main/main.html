@@ -51,18 +51,21 @@
           <td>{{$index+1}}</td>
 
           <td ng-hide="main.modeStates.isEdit[$index]">{{server.ip}}</td>
-          <td ng-show="main.modeStates.isEdit[$index]"><input type="text" ng-model="server.ip"></td>
-
           <td ng-hide="main.modeStates.isEdit[$index]">{{server.name}}</td>
-          <td ng-show="main.modeStates.isEdit[$index]"><input type="text" ng-model="server.name"></td>
-
           <td ng-hide="main.modeStates.isEdit[$index]">{{server.currentVersion}}</td>
+          <td ng-hide="main.modeStates.isEdit[$index]">
+            <button type="button" class="btn btn-primary" ng-click="main.handleEdit(server, $index)">Edit</button>
+            <hm-update-version on-update="main.updateField(server, 'currentVersion', value)" versions="main.versions"></hm-update-version>
+            <button type="button" class="btn btn-danger" ng-click="main.deleteItem(server, $index)">Delete</button>
+          </td>
+
+          <td ng-show="main.modeStates.isEdit[$index]"><input type="text" ng-model="server.ip"></td>
+          <td ng-show="main.modeStates.isEdit[$index]"><input type="text" ng-model="server.name"></td>
           <td ng-show="main.modeStates.isEdit[$index]"><input type="text" ng-model="server.currentVersion"></td>
 
-          <td>
-              <button type="button" ng-class="(main.modeStates.isEdit[$index])? 'btn btn-success' : 'btn btn-primary'" ng-click="main.handleEdit(server, $index)">{{(main.modeStates.isEdit[$index])? "Save" : "Edit"}}</button>
-              <button type="button" class="btn btn-warning" ng-if="main.modeStates.isEdit[$index]" ng-click="main.reset(server, $index)">Reset</button>
-              <hm-update-version ng-hide="main.modeStates.isEdit[$index]" on-update="main.updateField(server, 'currentVersion', value)" versions="main.versions"></hm-update-version>
+          <td ng-show="main.modeStates.isEdit[$index]">
+              <button type="button" class="btn btn-success" ng-click="main.saveEdit(server, $index)">Save</button>
+              <button type="button" class="btn btn-warning" ng-click="main.reset(server, $index)">Reset</button>
               <button type="button" class="btn btn-danger" ng-click="main.deleteItem(server, $index)">Delete</button>
           </td>
         </tr>
