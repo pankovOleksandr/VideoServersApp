@@ -48,14 +48,11 @@ class MainController {
       alert('Empty new object');
     }
   }
-  // createActions($event, newItem) {
-  //
-  //     case "Cancel":
-  //       this.modeStates.isCreate = false;
-  //       this.newItem = {};
-  //       break;
-  //   }
-  // }
+
+  cancelCreating() {
+    this.modeStates.isCreate = false;
+    this.newItem = {};
+  }
 
   handleEdit(item, $index) {
 
