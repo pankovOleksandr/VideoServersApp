@@ -16,7 +16,7 @@
           } else {
             servers.forEach(function(el, i) {
               if (el._id) return;
-              el._id = createID();
+              createID(el);
             });
 
             localStorage.saveToLocalStorage('servers', servers);
@@ -24,9 +24,21 @@
           }
         }
 
-        function createID() {
-          createID.prevID = createID.prevID || servers[servers.length-1]._id || 0;
-          return ++createID.prevID;
+        function findMaxID(arr) {
+          var maxID = 0;
+          arr.forEach(function(el) {
+            if (el.hasOwnProperty('_id')) {
+              if (maxID < el._id) {
+                maxID = el._id;
+              }
+            }
+          });
+          return maxID;
+        }
+
+        function createID(item) {
+          var lastID = findMaxID(servers);
+          item._id = ++lastID;
         }
 
         function getServersList() {
@@ -34,7 +46,9 @@
 			  }
 
 	  		function createItem(newItem) {
+          createID(newItem);
 	  			servers.unshift(newItem);
+          console.log(servers);
 	  		}
 
 	  		function editItem(item) {
@@ -45,9 +59,10 @@
 	  		function deleteItem(item) {
           let index = servers.indexOf(item);
           servers.splice(index,1);
+          console.log('servers', servers);
 
 	  		}
-        
+
         function getVersions() {
           return localStorage.getFromLocalStorage('versions');
         }

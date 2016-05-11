@@ -4,11 +4,11 @@
 
 class MainController {
 
-  constructor(transferDataService) {
+  constructor(transferDataFactory) {
 
     this.servers = [];
     this.versions = [];
-    this.transferDataService = transferDataService();
+    this.transferDataFactory = transferDataFactory();
     this.modeStates = {
       isCreate: false,
       isEdit : {}
@@ -21,8 +21,8 @@ class MainController {
   $onInit() {
 
     console.log("INIT CONTROLLER");
-    this.servers = this.transferDataService.getServersList();
-    this.versions = this.transferDataService.getAllVersions();
+    this.servers = this.transferDataFactory.getServersList();
+    this.versions = this.transferDataFactory.getAllVersions();
 
   }
 
@@ -35,7 +35,7 @@ class MainController {
     switch (btnType) {
       case "Create":
         if (newItem.ip || newItem.name || newItem.currentVersion) {
-          this.transferDataService.createServerItem(newItem);
+          this.transferDataFactory.createServerItem(newItem);
           this.modeStates.isCreate = false;
           this.newItem = {};
         } else {
@@ -53,7 +53,7 @@ class MainController {
   handleEdit(item, $index) {
 
     if (this.modeStates.isEdit[$index]) {
-      this.transferDataService.editServiceItem(item);
+      this.transferDataFactory.editServiceItem(item);
       this.modeStates.isEdit[$index] = null;
       return;
     }
@@ -67,19 +67,19 @@ class MainController {
   }
 
   reset(item, $index) {
-    this.transferDataService.editServiceItem(this.serverCopy);
+    this.transferDataFactory.editServiceItem(this.serverCopy);
     this.modeStates.isEdit[$index] = null;
   }
 
   delete(item, $index) {
-    this.transferDataService.deleteServiceItem(item);
+    this.transferDataFactory.deleteServiceItem(item);
     this.modeStates.isEdit[$index] = null;
   }
 
   updateField(item, prop, value) {
     console.log('in updateField');
     item[prop] = value;
-    this.transferDataService.editServiceItem(item);
+    this.transferDataFactory.editServiceItem(item);
   }
   /** function used for filter's select
    */

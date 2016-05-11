@@ -2,7 +2,7 @@ angular.module('videoServersApp')
       .provider('localStorageService', function() {
         'use strict';
 
-        var PREFIX = 'Harmonic',
+        var PREFIX = 'Harmonic-',
               storage = window.localStorage;
 
           this.setPrefix = function(newPrefix) {
