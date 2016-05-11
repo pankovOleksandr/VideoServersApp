@@ -14,7 +14,6 @@ class MainController {
       isEdit : {}
     };
     this.newItem = {};
-    this.serverCopy = {};
 
   }
 
@@ -56,22 +55,21 @@ class MainController {
 
   handleEdit(item, $index) {
 
-    if (this.modeStates.isEdit[$index]) {
-      this.transferDataFactory.editServiceItem(item);
-      this.modeStates.isEdit[$index] = false;
-      return;
-    }
-
     for (var key in this.modeStates.isEdit) {
       if (this.modeStates.isEdit.hasOwnProperty(key)) delete this.modeStates.isEdit[key];
     };
 
-    angular.copy(item, this.serverCopy);
     this.modeStates.isEdit[$index] = true;
   }
 
-  reset(item, $index) {
-    this.transferDataFactory.editServiceItem(this.serverCopy);
+  saveEdit(item, $index) {
+    this.transferDataFactory.editServiceItem(item);
+    this.modeStates.isEdit[$index] = false;
+    this.servers = this.getServers();
+  }
+
+  resetEdit(item, $index) {
+    this.servers = this.getServers();
     this.modeStates.isEdit[$index] = false;
   }
 
