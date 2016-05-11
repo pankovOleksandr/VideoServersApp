@@ -24,7 +24,6 @@
           }
         }
 
-
         function findMaxID(arr) {
           var maxID = 0;
           arr.forEach(function(el) {
@@ -54,21 +53,22 @@
           createID(newItem);
 	  			servers.unshift(newItem);
           localStorage.saveToLocalStorage('servers', servers);
-
-          console.log(servers);
 	  		}
 
 	  		function editItem(item) {
-          let index = servers.indexOf(item);
-          servers[index] = item;
+          servers.forEach(function(el, i, arr) {
+            if (el._id === item._id) {
+              arr[i] = item;
+            };
+          });
+          localStorage.saveToLocalStorage('servers', servers);          
 	  		}
 
 	  		function deleteItem(item) {
           servers = servers.filter(function (el) {
             return (el._id !== item._id);
           });
-          localStorage.saveToLocalStorage('servers', servers);         
-          console.log('servers', servers);
+          localStorage.saveToLocalStorage('servers', servers);
 	  		}
 
         function getVersions() {

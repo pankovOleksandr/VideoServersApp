@@ -82,9 +82,9 @@ class MainController {
   }
 
   updateField(item, prop, value) {
-    console.log('in updateField');
     item[prop] = value;
     this.transferDataFactory.editServiceItem(item);
+    this.servers = this.getServers();
   }
   /** function used for filter's select
    */
