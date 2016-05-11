@@ -100,7 +100,10 @@ class MainController {
   getUsedVersion() {
     var usedVersions = ['All'];
     for (var i=0; i<this.servers.length; i++) {
-      usedVersions.push( this.servers[i].currentVersion );
+      let curVersion = this.servers[i].currentVersion;
+      if (usedVersions.indexOf(curVersion) === -1) {
+        usedVersions.push( curVersion );
+      }
     }
     return usedVersions;
   }
