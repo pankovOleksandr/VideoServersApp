@@ -58,7 +58,7 @@ class MainController {
 
     if (this.modeStates.isEdit[$index]) {
       this.transferDataFactory.editServiceItem(item);
-      this.modeStates.isEdit[$index] = null;
+      this.modeStates.isEdit[$index] = false;
       return;
     }
 
@@ -72,12 +72,13 @@ class MainController {
 
   reset(item, $index) {
     this.transferDataFactory.editServiceItem(this.serverCopy);
-    this.modeStates.isEdit[$index] = null;
+    this.modeStates.isEdit[$index] = false;
   }
 
-  delete(item, $index) {
+  deleteItem(item, $index) {
     this.transferDataFactory.deleteServiceItem(item);
-    this.modeStates.isEdit[$index] = null;
+    this.modeStates.isEdit[$index] = false;
+    this.servers = this.getServers();
   }
 
   updateField(item, prop, value) {

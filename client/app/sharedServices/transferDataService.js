@@ -64,10 +64,11 @@
 	  		}
 
 	  		function deleteItem(item) {
-          let index = servers.indexOf(item);
-          servers.splice(index,1);
+          servers = servers.filter(function (el) {
+            return (el._id !== item._id);
+          });
+          localStorage.saveToLocalStorage('servers', servers);         
           console.log('servers', servers);
-
 	  		}
 
         function getVersions() {
