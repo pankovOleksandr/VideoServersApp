@@ -58,3 +58,15 @@
     }
   }
 }
+
+#list-header {
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+#list-body {
+  input {
+    width: 95%;
+  }
+}

@@ -9,63 +9,108 @@
     </p>
   </div>
 </header>
-
 <div class="container">
   <div class="row">
     <div class="col-sm-6 col-sm-offset-3">
       <button type="button" class="btn btn-primary btn-block" ng-click="main.handleCreate()">Create</button>
       <button type="button" class="btn btn-primary btn-block" ng-click="main.handleRestart()">Restart</button>
       <br/>
-      <br/>
       <div>
         <label>Choose version:  <select ng-model="main.filterValue" ng-options="version for version in main.getUsedVersion()"></select></label>
       </div>
-
-
-    </div>
-  	<div class="col-sm-12 table-responsive">
-	    <table class="table table-hover table-bordered">
-		  <caption><h3>Spectrum Video Servers</h3></caption>
-	      <tr>
-	      	<th>#</th>
-	      	<th>IP</th>
-	      	<th>Name</th>
-	      	<th>Current Version</th>
-          <th>Actions</th>
-	      </tr>
-        <tr ng-show="main.modeStates.isCreate">
-          <td></td>
-          <td><input type="text" ng-model="main.newItem.ip" placeholder="xx.xx.xxx.xxx" ng-focus="main.modeStates.isCreate"></td>
-          <td><input type="text" ng-model="main.newItem.name" placeholder="name" ng-required></td>
-          <td><input type="text" ng-model="main.newItem.currentVersion" placeholder="xxx.xx.xx.xx"></td>
-          <td>
-              <button type="button" class="btn btn-primary" ng-click="main.createItem(main.newItem)">Create</button>
-              <button type="button" class="btn btn-warning" ng-click="main.cancelCreating()">Cancel</button>
-          </td>
-        </tr>
-        <tr ng-repeat="server in main.servers | versionFilter : main.filterValue">
-          <td>{{$index+1}}</td>
-
-          <td ng-hide="main.modeStates.isEdit[$index]">{{server.ip}}</td>
-          <td ng-hide="main.modeStates.isEdit[$index]">{{server.name}}</td>
-          <td ng-hide="main.modeStates.isEdit[$index]">{{server.currentVersion}}</td>
-          <td ng-hide="main.modeStates.isEdit[$index]">
-            <button type="button" class="btn btn-primary" ng-click="main.handleEdit(server, $index)">Edit</button>
-            <hm-update-version on-update="main.updateField(server, 'currentVersion', value)" versions="main.versions"></hm-update-version>
-            <button type="button" class="btn btn-danger" ng-click="main.deleteItem(server, $index)">Delete</button>
-          </td>
-
-          <td ng-show="main.modeStates.isEdit[$index]"><input type="text" ng-model="server.ip"></td>
-          <td ng-show="main.modeStates.isEdit[$index]"><input type="text" ng-model="server.name"></td>
-          <td ng-show="main.modeStates.isEdit[$index]"><input type="text" ng-model="server.currentVersion"></td>
-
-          <td ng-show="main.modeStates.isEdit[$index]">
-              <button type="button" class="btn btn-success" ng-click="main.saveEdit(server, $index)">Save</button>
-              <button type="button" class="btn btn-warning" ng-click="main.resetEdit(server, $index)">Reset</button>
-              <button type="button" class="btn btn-danger" ng-click="main.deleteItem(server, $index)">Delete</button>
-          </td>
-        </tr>
-	    </table>
+      <br/>
     </div>
   </div>
 </div>
+
+<div id="servers-list">
+  <div id="list-header" class="container">
+    <div class="row">
+      <div class="col-xs-1 text-center">#</div>
+      <div class="col-xs-2 text-center">ip</div>
+      <div class="col-xs-2 text-center">name</div>
+      <div class="col-xs-3 text-center">current version</div>
+      <div class="col-xs-4 text-center">actions</div>
+    </div>
+  </div>
+  <div id="list-body" class="container">
+    <div ng-if="main.modeStates.isCreate" class="row">
+      <div class="col-xs-1"></div>
+      <div class="col-xs-2 text-center">
+        <input type="text" ng-model="main.newItem.ip" placeholder="xx.xx.xxx.xxx" ng-focus="main.modeStates.isCreate">
+      </div>
+      <div class="col-xs-2 text-center">
+        <input type="text" ng-model="main.newItem.name" placeholder="name" ng-required>
+      </div>
+      <div class="col-xs-3 text-center">
+        <input type="text" ng-model="main.newItem.currentVersion" placeholder="xxx.xx.xx.xx">
+      </div>
+      <div class="col-xs-4 text-center">
+        <button type="button" class="btn btn-primary" ng-click="main.createItem(main.newItem)">Create</button>
+        <button type="button" class="btn btn-warning" ng-click="main.cancelCreating()">Cancel</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!--<div class="container">-->
+  <!--<div class="row">-->
+    <!--<div class="col-sm-6 col-sm-offset-3">-->
+      <!--<button type="button" class="btn btn-primary btn-block" ng-click="main.handleCreate()">Create</button>-->
+      <!--<button type="button" class="btn btn-primary btn-block" ng-click="main.handleRestart()">Restart</button>-->
+      <!--<br/>-->
+      <!--<br/>-->
+      <!--<div>-->
+        <!--<label>Choose version:  <select ng-model="main.filterValue" ng-options="version for version in main.getUsedVersion()"></select></label>-->
+      <!--</div>-->
+
+
+    <!--</div>-->
+  	<!--<div class="col-sm-12 table-responsive">-->
+	    <!--<table class="table table-hover table-bordered">-->
+		  <!--<caption><h3>Spectrum Video Servers</h3></caption>-->
+	      <!--<tr>-->
+	      	<!--<th>#</th>-->
+	      	<!--<th>IP</th>-->
+	      	<!--<th>Name</th>-->
+	      	<!--<th>Current Version</th>-->
+          <!--<th>Actions</th>-->
+	      <!--</tr>-->
+        <!--<tr ng-show="main.modeStates.isCreate">-->
+          <!--<td></td>-->
+          <!--<td><input type="text" ng-model="main.newItem.ip" placeholder="xx.xx.xxx.xxx" ng-focus="main.modeStates.isCreate"></td>-->
+          <!--<td><input type="text" ng-model="main.newItem.name" placeholder="name" ng-required></td>-->
+          <!--<td><input type="text" ng-model="main.newItem.currentVersion" placeholder="xxx.xx.xx.xx"></td>-->
+          <!--<td>-->
+              <!--<button type="button" class="btn btn-primary" ng-click="main.createItem(main.newItem)">Create</button>-->
+              <!--<button type="button" class="btn btn-warning" ng-click="main.cancelCreating()">Cancel</button>-->
+          <!--</td>-->
+        <!--</tr>-->
+        <!--<tr ng-repeat="server in main.servers | versionFilter : main.filterValue">-->
+          <!--<td>{{$index+1}}</td>-->
+
+          <!--<td ng-hide="main.modeStates.isEdit[$index]">{{server.ip}}</td>-->
+          <!--<td ng-hide="main.modeStates.isEdit[$index]">{{server.name}}</td>-->
+          <!--<td ng-hide="main.modeStates.isEdit[$index]">{{server.currentVersion}}</td>-->
+          <!--<td ng-hide="main.modeStates.isEdit[$index]">-->
+            <!--<button type="button" class="btn btn-primary" ng-click="main.handleEdit(server, $index)">Edit</button>-->
+            <!--<hm-update-version on-update="main.updateField(server, 'currentVersion', value)" versions="main.versions"></hm-update-version>-->
+            <!--<button type="button" class="btn btn-danger" ng-click="main.deleteItem(server, $index)">Delete</button>-->
+          <!--</td>-->
+
+          <!--<td ng-show="main.modeStates.isEdit[$index]"><input type="text" ng-model="server.ip"></td>-->
+          <!--<td ng-show="main.modeStates.isEdit[$index]"><input type="text" ng-model="server.name"></td>-->
+          <!--<td ng-show="main.modeStates.isEdit[$index]"><input type="text" ng-model="server.currentVersion"></td>-->
+
+          <!--<td ng-show="main.modeStates.isEdit[$index]">-->
+              <!--<button type="button" class="btn btn-success" ng-click="main.saveEdit(server, $index)">Save</button>-->
+              <!--<button type="button" class="btn btn-warning" ng-click="main.resetEdit(server, $index)">Reset</button>-->
+              <!--<button type="button" class="btn btn-danger" ng-click="main.deleteItem(server, $index)">Delete</button>-->
+          <!--</td>-->
+        <!--</tr>-->
+	    <!--</table>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
