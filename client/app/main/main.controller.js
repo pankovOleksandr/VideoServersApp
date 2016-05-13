@@ -10,17 +10,35 @@ class MainController {
     this.transferDataFactory = transferDataFactory();
     this.modeStates = {
       isCreate: false,
-      isEdit : {}
+      isEdit : {},
+      isUpdate: {},
+      hideUpdateSelect: function() {
+        $scope.$broadcast('hide-select-mode');
+      },
+      toDefault: function toDefault() {
+        this.isCreate = false;
+        this.isEdit = {};
+        this.isUpdate = {};
+        this.hideUpdateSelect();
+      }
     };
     this.newItem = {};
     this.filterValue = 'All';
-    this.serverItemCopy = {};
+    this.editStartedflag = false;
 
     $scope.$on('transferData: dataRefreshed', this.onDataRefresh.bind(this));
-  }
 
-  onDataRefresh() {
-    this.servers = this.getServers();
+    this.handleUpdate = function(item, $index) {
+
+      if (this.modeStates.isUpdate[$index]) {
+        this.modeStates.isUpdate[$index] = false;
+      } else {
+        this.modeStates.toDefault();
+        this.modeStates.isUpdate[$index] = true;
+      }
+
+    }
+
   }
 
   $onInit() {
@@ -30,16 +48,16 @@ class MainController {
 
   }
 
+  onDataRefresh() {
+    this.servers = this.getServers();
+  }
+
   getServers() {
     return angular.copy(this.transferDataFactory.getServersList());
   }
 
   getVersions() {
     return angular.copy(this.transferDataFactory.getVersions());
-  }
-
-  handleCreate() {
-    this.modeStates.isCreate = true;
   }
 
   createItem(newItem) {
@@ -53,40 +71,21 @@ class MainController {
     }
   }
 
-  cancelCreating() {
-    this.modeStates.isCreate = false;
-    this.newItem = {};
-  }
-
-  handleEdit(item, $index) {
-    if (this.serverItemCopy) {
-      this.servers = this.getServers();
-      this.serverItemCopy = {};
-    }
-
-    for (var key in this.modeStates.isEdit) {
-      if (this.modeStates.isEdit.hasOwnProperty(key)) delete this.modeStates.isEdit[key];
-    };
-
-    this.serverItemCopy = angular.copy(item);
-    this.modeStates.isEdit[$index] = true;
-  }
-
   saveEdit(item, $index) {
     this.transferDataFactory.editServiceItem(item);
-    this.modeStates.isEdit[$index] = false;
+    this.modeStates.toDefault();
     this.servers = this.getServers();
-    this.serverItemCopy = {};
+    this.editStartedflag = false;
   }
 
   resetEdit(item, $index) {
     this.servers = this.getServers();
-    this.modeStates.isEdit[$index] = false;
+    this.modeStates.toDefault();
   }
 
   deleteItem(item, $index) {
     this.transferDataFactory.deleteServiceItem(item);
-    this.modeStates.isEdit[$index] = false;
+    this.modeStates.toDefault();
     this.servers = this.getServers();
   }
 
@@ -95,8 +94,12 @@ class MainController {
     this.transferDataFactory.editServiceItem(item);
     this.servers = this.getServers();
   }
-  /** function used for filter's select
-   */
+
+  getInitialValues() {
+    this.transferDataFactory.getInitialValues();
+    this.modeStates.toDefault();
+  }
+
   getUsedVersion() {
     var usedVersions = ['All'];
     for (var i=0; i<this.servers.length; i++) {
@@ -108,10 +111,28 @@ class MainController {
     return usedVersions;
   }
 
-  handleRestart() {
-    this.transferDataFactory.getInitialValues();
+  handleCreate() {
+    this.modeStates.toDefault();
+    this.modeStates.isCreate = true;
   }
 
+  cancelCreating() {
+    this.modeStates.isCreate = false;
+    this.newItem = {};
+  }
+
+  handleEdit(item, $index) {
+
+    if (this.editStartedflag) {
+      this.servers = this.getServers();
+      this.editStartedflag = false;
+    }
+
+    this.modeStates.toDefault();
+
+    this.editStartedflag = true;
+    this.modeStates.isEdit[$index] = true;
+  }
 }
 
 angular.module('videoServersApp')
