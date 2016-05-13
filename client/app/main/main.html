@@ -61,7 +61,7 @@
                            select-mode="angular.isDefined(main.modeStates.isUpdate[$index])">
 
         </hm-update-version>
-        <button type="button" class="btn btn-danger" ng-click="main.deleteItem(server, $index)">Delete</button>
+        <button ng-if="!main.modeStates.isUpdate[$index]" type="button" class="btn btn-danger" ng-click="main.deleteItem(server, $index)">Delete</button>
       </div>
     </div>
     <div ng-if="main.modeStates.isEdit[$index]" class="row">
