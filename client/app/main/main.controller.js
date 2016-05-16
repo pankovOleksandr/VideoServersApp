@@ -12,21 +12,25 @@ class MainController {
       isCreate: false,
       isEdit : {},
       isUpdate: {},
-      hideUpdateSelect: function() {
-        $scope.$broadcast('hide-select-mode');
-      },
-      toDefault: function toDefault() {
-        this.isCreate = false;
-        this.isEdit = {};
-        this.isUpdate = {};
-        this.hideUpdateSelect();
-      }
+      hideUpdateSelect: hideUpdateSelect,
+      toDefault: toDefault
     };
     this.newItem = {};
     this.filterValue = 'All';
     this.editStartedflag = false;
 
     $scope.$on('transferData: dataRefreshed', this.onDataRefresh.bind(this));
+
+    function toDefault() {
+      this.isCreate = false;
+      this.isEdit = {};
+      this.isUpdate = {};
+      this.hideUpdateSelect();
+    }
+
+    function hideUpdateSelect() {
+      $scope.$broadcast('hide-select-mode');
+    }
 
   }
 

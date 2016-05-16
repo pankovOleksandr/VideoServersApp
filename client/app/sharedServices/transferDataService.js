@@ -63,7 +63,7 @@
           servers.forEach(function(el, i, arr) {
             if (el._id === item._id) {
               arr[i] = item;
-            };
+            }
           });
           localStorage.saveToLocalStorage('servers', servers);
 	  		}
