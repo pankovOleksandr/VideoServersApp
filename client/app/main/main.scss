@@ -64,6 +64,11 @@
   font-weight: bold;
   margin-bottom: 20px;
 }
+#list-new-item {
+  input {
+    width: 95%;
+  }
+}
 
 #list-body {
   input {
