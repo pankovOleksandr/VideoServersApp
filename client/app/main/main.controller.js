@@ -28,17 +28,6 @@ class MainController {
 
     $scope.$on('transferData: dataRefreshed', this.onDataRefresh.bind(this));
 
-    this.handleUpdate = function(item, $index) {
-
-      if (this.modeStates.isUpdate[$index]) {
-        this.modeStates.isUpdate[$index] = false;
-      } else {
-        this.modeStates.toDefault();
-        this.modeStates.isUpdate[$index] = true;
-      }
-
-    }
-
   }
 
   $onInit() {
@@ -129,9 +118,18 @@ class MainController {
     }
 
     this.modeStates.toDefault();
-
     this.editStartedflag = true;
     this.modeStates.isEdit[$index] = true;
+  }
+
+  handleUpdate(item, $index) {
+
+    if (this.modeStates.isUpdate[$index]) {
+      this.modeStates.isUpdate[$index] = false;
+    } else {
+      this.modeStates.toDefault();
+      this.modeStates.isUpdate[$index] = true;
+    }
   }
 }
 

@@ -22,7 +22,7 @@
         ctrl.onUpdate({value: ctrl.myVersion});
       }
       ctrl.selectMode = !ctrl.selectMode;
-    }
+    };
 
     ctrl.handleCancel = function () {
       if (ctrl.selectMode) {
