@@ -11,7 +11,7 @@ class MainController {
     this.modeStates = {
       isCreate: false,
       isEdit : {},
-      isUpdate: {},      
+      isUpdate: {},
       toDefault: toDefault
     };
     this.newItem = {};
@@ -24,7 +24,6 @@ class MainController {
       this.isCreate = false;
       this.isEdit = {};
       this.isUpdate = {};
-      this.hideUpdateSelect();
     }
   }
 

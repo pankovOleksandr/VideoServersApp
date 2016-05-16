@@ -9,10 +9,20 @@
                                                                                                                                $rootScope){
 	  	return function createTransferDataApi(){
 
-	  		var publicAPI = {},
+	  		var publicAPI = {
+            getServersList : getServersList,
+            createServerItem : createItem,
+            editServiceItem : editItem,
+            deleteServiceItem : deleteItem,
+            getVersions : getVersions,
+            getInitialValues: restart
+          },
             servers = localStorage.getFromLocalStorage('servers') || defaultData.getServers() || [],
-            // servers =  defaultData.getServers() || [],
             versions = localStorage.getFromLocalStorage('versions') || defaultData.getVersions() || [];
+
+        init();
+
+        return publicAPI;
 
         function init() {
           if (servers.length == 0 || versions.length == 0) {
@@ -93,16 +103,6 @@
           )
         }
 
-        init();
-
-	  		return publicAPI = {
-	  			getServersList : getServersList,
-	  			createServerItem : createItem,
-	  			editServiceItem : editItem,
-	  			deleteServiceItem : deleteItem,
-          getVersions : getVersions,
-          getInitialValues: restart
-	  		}
 	  	};
 	  }])
 
