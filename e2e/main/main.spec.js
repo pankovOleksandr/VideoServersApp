@@ -12,9 +12,16 @@ describe('Main View', function() {
 
   it('should include jumbotron with correct data', function() {
     expect(page.h1El.getText()).toBe('Spectrum Video Servers');
-    expect(page.imgEl.getAttribute('src')).toMatch(/harmonic-logo-2.png$/);
-    expect(page.imgEl.getAttribute('alt')).toBe('Harmonic logo');
     expect(page.p.getText()).toBe('It\'s a simple AngularJS CRUD application');
-    
   });
+
+  it('should include create and restart buttons', function() {
+    expect(page.createBtn.isPresent()).toBeTruthy();
+    expect(page.restartBtn.isPresent()).toBeTruthy();
+  });
+
+  it('should include filter select element', function() {
+    expect(page.filterSelectEl.isPresent()).toBeTruthy();
+    expect(page.filterSelectEl.getText()).toContain('All');
+  })
 });

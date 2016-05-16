@@ -47,7 +47,7 @@ class MainController {
     return angular.copy(this.transferDataFactory.getVersions());
   }
 
-  createItem(newItem) {
+  addItem(newItem) {
     if (newItem.ip || newItem.name || newItem.currentVersion) {
       this.transferDataFactory.createServerItem(newItem);
       this.modeStates.isCreate = false;

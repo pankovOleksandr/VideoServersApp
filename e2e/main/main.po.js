@@ -6,10 +6,15 @@
 'use strict';
 
 var MainPage = function() {
-  this.harmonicEl = element(by.css('.hero-unit'));
-  this.h1El = this.harmonicEl.element(by.css('h1'));
-  this.imgEl = this.harmonicEl.element(by.css('img'));
-  this.p = this.harmonicEl.element(by.css('.lead'));
+  this.harmonicHeader = element(by.css('.harmonic-head'));
+  this.h1El = this.harmonicHeader.element(by.css('h1'));
+  this.imgEl = this.harmonicHeader.element(by.css('img'));
+  this.p = this.harmonicHeader.element(by.css('.lead'));
+
+  this.createBtn = element(by.buttonText('Create'));
+  this.restartBtn = element(by.buttonText('Restart'));
+  this.filterSelectEl = element(by.model('main.filterValue'));
+
 };
 
 module.exports = new MainPage();
