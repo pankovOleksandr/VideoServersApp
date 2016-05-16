@@ -11,8 +11,7 @@ class MainController {
     this.modeStates = {
       isCreate: false,
       isEdit : {},
-      isUpdate: {},
-      hideUpdateSelect: hideUpdateSelect,
+      isUpdate: {},      
       toDefault: toDefault
     };
     this.newItem = {};
@@ -27,11 +26,6 @@ class MainController {
       this.isUpdate = {};
       this.hideUpdateSelect();
     }
-
-    function hideUpdateSelect() {
-      $scope.$broadcast('hide-select-mode');
-    }
-
   }
 
   $onInit() {

@@ -1,7 +1,7 @@
-<span ng-switch="$ctrl.selectMode">
+<span ng-switch="$ctrl.isSelected">
   <select ng-switch-when="true" ng-model="$ctrl.myVersion"
-      ng-options="version for version in $ctrl.versions"></select>
+          ng-options="version for version in $ctrl.versions"></select>
   <button ng-switch-when="true" ng-click="$ctrl.handleUpdate()" class="btn btn-success">Update</button>
   <button ng-switch-when="true" ng-click="$ctrl.handleCancel()" class="btn btn-warning">Cancel</button>
-  <button ng-switch-default ng-click="$ctrl.handleUpdate()" type="button" class="btn btn-primary updateBtn">Update version</button>
+  <button ng-switch-default ng-click="$ctrl.handleUpdateVersion()" type="button" class="btn btn-primary updateBtn">Update version</button>
 </span>

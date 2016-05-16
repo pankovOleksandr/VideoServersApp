@@ -54,14 +54,11 @@
       <div class="col-xs-3 text-center">{{server.currentVersion}}</div>
       <div class="col-xs-4">
         <button ng-if="!main.modeStates.isUpdate[$index]" type="button" class="btn btn-primary" ng-click="main.handleEdit(server, $index)">Edit</button>
-
         <button ng-if="!main.modeStates.isUpdate[$index]" type="button" class="btn btn-danger" ng-click="main.deleteItem(server, $index)">Delete</button>
         <hm-update-version on-update="main.updateField(server, 'currentVersion', value)"
                            versions="main.versions"
                            change-parent-state="main.handleUpdate(server, $index)"
-
-                           <!--select-mode="angular.isDefined(main.modeStates.isUpdate[$index])"-->
-        >
+                           is-selected="main.modeStates.isUpdate[$index]">
 
         </hm-update-version>
       </div>

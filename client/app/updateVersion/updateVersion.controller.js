@@ -6,34 +6,26 @@
 
 (function () {
 
-  function UpdateVersionController($scope, $log) {
+  function UpdateVersionController() {
     var ctrl = this;
 
     ctrl.selectMode = false;
     ctrl.myVersion = ctrl.versions[0];
     ctrl.handleUpdate = handleUpdate;
     ctrl.handleCancel = handleCancel;
-    $scope.$on('hide-select-mode', hideSelectMode);
+    ctrl.handleUpdateVersion = handleUpdateVersion;
 
     function handleUpdate() {
+      ctrl.onUpdate({value: ctrl.myVersion});
       ctrl.changeParentState({});
-      if (ctrl.selectMode) {
-        ctrl.onUpdate({value: ctrl.myVersion});
-      }
-      ctrl.selectMode = !ctrl.selectMode;
     }
 
     function handleCancel() {
-      if (ctrl.selectMode) {
-        ctrl.changeParentState({});
-        ctrl.selectMode = !ctrl.selectMode;
-      }
+      ctrl.changeParentState({});
     }
 
-    function hideSelectMode() {
-      if (ctrl.selectMode) {
-        ctrl.selectMode = !ctrl.selectMode;
-      }
+    function handleUpdateVersion() {
+      ctrl.changeParentState({});
     }
   }
 
@@ -44,7 +36,8 @@
       bindings: {
         onUpdate: '&',
         changeParentState: '&',
-        versions: '<'
+        versions: '<',
+        isSelected: '<'
       }
     });
 
