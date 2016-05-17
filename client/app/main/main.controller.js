@@ -4,7 +4,7 @@
 
 class MainController {
 
-  constructor(transferDataFactory, $scope) {
+  constructor(transferDataFactory, $scope, $q, $timeout) {
     this.servers = [];
     this.versions = [];
     this.transferDataFactory = transferDataFactory();
@@ -17,6 +17,7 @@ class MainController {
     this.newItem = {};
     this.filterValue = 'All';
     this.editStartedflag = false;
+    this.handleRestart = handleRestart;
 
     $scope.$on('transferData: dataRefreshed', this.onDataRefresh.bind(this));
 
@@ -24,6 +25,24 @@ class MainController {
       this.isCreate = false;
       this.isEdit = {};
       this.isUpdate = {};
+    }
+
+    function handleRestart() {
+      var _self = this;
+      this.isLoading = 'progress';
+      var promise = $q(function(resolve,reject) {
+        $timeout(function() {
+          console.log(this);
+          _self.getInitialValues();
+          _self.isLoading = 'message';
+          resolve();
+        }, 2000);
+      })
+        .then(function() {
+          $timeout(function() {
+            _self.isLoading = '';
+          }, 1500);
+        });
     }
   }
 
@@ -57,22 +76,16 @@ class MainController {
     }
   }
 
-  saveEdit(item, $index) {
+  saveEdit(item) {
     this.transferDataFactory.editServiceItem(item);
     this.modeStates.toDefault();
     this.servers = this.getServers();
     this.editStartedflag = false;
   }
 
-  resetEdit(item, $index) {
+  resetEdit() {
     this.servers = this.getServers();
     this.modeStates.toDefault();
-  }
-
-  deleteItem(item, $index) {
-    this.transferDataFactory.deleteServiceItem(item);
-    this.modeStates.toDefault();
-    this.servers = this.getServers();
   }
 
   updateField(item, prop, value) {
@@ -107,7 +120,7 @@ class MainController {
     this.newItem = {};
   }
 
-  handleEdit(item, $index) {
+  handleEdit($index) {
 
     if (this.editStartedflag) {
       this.servers = this.getServers();
@@ -119,7 +132,7 @@ class MainController {
     this.modeStates.isEdit[$index] = true;
   }
 
-  handleUpdate(item, $index) {
+  handleUpdate($index) {
 
     if (this.modeStates.isUpdate[$index]) {
       this.modeStates.isUpdate[$index] = false;
@@ -128,6 +141,13 @@ class MainController {
       this.modeStates.isUpdate[$index] = true;
     }
   }
+
+  handleDelete(item, $index) {
+    this.transferDataFactory.deleteServiceItem(item);
+    this.modeStates.toDefault();
+    this.servers = this.getServers();
+  }
+
 }
 
 angular.module('videoServersApp')

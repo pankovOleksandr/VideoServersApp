@@ -15,7 +15,7 @@
             editServiceItem : editItem,
             deleteServiceItem : deleteItem,
             getVersions : getVersions,
-            getInitialValues: restart
+            getInitialValues: getInitialValues
           },
             servers = localStorage.getFromLocalStorage('servers') || defaultData.getServers() || [],
             versions = localStorage.getFromLocalStorage('versions') || defaultData.getVersions() || [];
@@ -93,7 +93,7 @@
           return versions;
         }
 
-        function restart() {
+        function getInitialValues() {
           $http.get('/api/things').then(
             function(res) {
               servers = res.data;
