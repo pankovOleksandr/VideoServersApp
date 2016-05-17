@@ -53,8 +53,8 @@
       <input type="text" ng-model="main.newItem.currentVersion" placeholder="xxx.xx.xx.xx">
     </div>
     <div class="col-xs-4">
-      <button type="button" class="btn btn-primary" ng-click="main.addItem(main.newItem)">Add</button>
-      <button type="button" class="btn btn-warning" ng-click="main.cancelCreating()">Cancel</button>
+      <button type="button" class="btn btn-primary" ng-click="main.handleAdd(main.newItem)">Add</button>
+      <button type="button" class="btn btn-warning" ng-click="main.handleCancelCreating()">Cancel</button>
     </div>
   </div>
   <div id="list-body" ng-repeat="server in main.servers | versionFilter : main.filterValue">
@@ -65,7 +65,7 @@
       <div class="col-xs-3 text-center">{{server.currentVersion}}</div>
       <div class="col-xs-4">
         <button ng-if="!main.modeStates.isUpdate[$index]" type="button" class="btn btn-primary" ng-click="main.handleEdit($index)">Edit</button>
-        <button ng-if="!main.modeStates.isUpdate[$index]" type="button" class="btn btn-danger" ng-click="main.handleDelete(server, $index)">Delete</button>
+        <button ng-if="!main.modeStates.isUpdate[$index]" type="button" class="btn btn-danger" ng-click="main.handleDelete(server)">Delete</button>
         <hm-update-version on-update="main.updateField(server, 'currentVersion', value)"
                            versions="main.versions"
                            change-parent-state="main.handleUpdate($index)"
@@ -86,9 +86,9 @@
         <input type="text" ng-model="server.currentVersion">
       </div>
       <div class="col-xs-4">
-        <button type="button" class="btn btn-success" ng-click="main.saveEdit(server)">Save</button>
-        <button type="button" class="btn btn-warning" ng-click="main.resetEdit()">Reset</button>
-        <button type="button" class="btn btn-danger" ng-click="main.handleDelete(server, $index)">Delete</button>
+        <button type="button" class="btn btn-success" ng-click="main.handleSave(server)">Save</button>
+        <button type="button" class="btn btn-warning" ng-click="main.handleReset()">Reset</button>
+        <button type="button" class="btn btn-danger" ng-click="main.handleDelete(server)">Delete</button>
       </div>
     </div>
 

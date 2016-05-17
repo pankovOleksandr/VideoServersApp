@@ -17,9 +17,19 @@ class MainController {
     this.newItem = {};
     this.filterValue = 'All';
     this.editStartedflag = false;
-    this.handleRestart = handleRestart;
 
-    $scope.$on('transferData: dataRefreshed', this.onDataRefresh.bind(this));
+    //functions to handle buttons behavior
+    this.handleRestart = handleRestart;
+    this.handleCreate = handleCreate;
+    this.handleAdd = handleAdd;
+    this.handleCancelCreating = handleCancelCreating;
+    this.handleEdit = handleEdit;
+    this.handleSave = handleSave;
+    this.handleReset = handleReset;
+    this.handleDelete = handleDelete;
+    this.handleUpdate = handleUpdate;
+
+    $scope.$on('transferData: dataRefreshed', this.updateServers.bind(this));
 
     function toDefault() {
       this.isCreate = false;
@@ -32,8 +42,8 @@ class MainController {
       this.isLoading = 'progress';
       var promise = $q(function(resolve,reject) {
         $timeout(function() {
-          console.log(this);
           _self.getInitialValues();
+          _self.modeStates.toDefault();
           _self.isLoading = 'message';
           resolve();
         }, 2000);
@@ -44,6 +54,75 @@ class MainController {
           }, 1500);
         });
     }
+    function handleCreate() {
+      if (this.modeStates.isCreate) {
+        this.modeStates.isCreate = !this.modeStates.isCreate;
+      } else {
+        this.modeStates.toDefault();
+        this.modeStates.isCreate = true;
+      }
+    }
+    function handleAdd(newItem) {
+      try{
+        if (newItem.ip || newItem.name || newItem.currentVersion) {
+          this.addItem(newItem);
+          this.updateServers();
+          this.modeStates.isCreate = false;
+          this.newItem = {};
+        } else {
+          throw Error('You can\'t create empty object');
+        }
+      } catch(e) {
+        console.log(e);
+      }
+    }
+    function handleCancelCreating() {
+      this.modeStates.isCreate = false;
+      this.newItem = {};
+    }
+    function handleEdit($index) {
+
+      if (this.editStartedflag) {
+        this.editStartedflag = false;
+        this.updateServers();
+      }
+      this.modeStates.toDefault();
+      this.editStartedflag = true;
+      this.modeStates.isEdit[$index] = true;
+    }
+    function handleSave(editItem) {
+      try {
+        if (!editItem.ip && !editItem.name && !editItem.currentVersion) {
+          throw Error('You can\'t save empty item');
+        } else {
+          this.modeStates.toDefault();
+          this.editStartedflag = false;
+          this.saveItem(editItem);
+          this.updateServers();
+        }
+      } catch(e) {
+        console.log(e);
+      }
+    }
+    function handleReset() {
+      this.modeStates.toDefault();
+      this.updateServers();
+    }
+    function handleDelete(item) {
+      this.deleteItem(item);
+      this.modeStates.toDefault();
+      this.updateServers();
+    }
+    function handleUpdate($index) {
+
+      if (this.modeStates.isUpdate[$index]) {
+        this.modeStates.isUpdate[$index] = false;
+      } else {
+        this.modeStates.toDefault();
+        this.modeStates.isUpdate[$index] = true;
+      }
+    }
+
   }
 
   $onInit() {
@@ -53,8 +132,16 @@ class MainController {
 
   }
 
-  onDataRefresh() {
-    this.servers = this.getServers();
+  addItem(newItem) {
+      this.transferDataFactory.createServerItem(newItem);
+  }
+
+  saveItem(item) {
+    this.transferDataFactory.editServiceItem(item);
+  }
+
+  deleteItem(item) {
+    this.transferDataFactory.deleteServiceItem(item);
   }
 
   getServers() {
@@ -65,29 +152,6 @@ class MainController {
     return angular.copy(this.transferDataFactory.getVersions());
   }
 
-  addItem(newItem) {
-    if (newItem.ip || newItem.name || newItem.currentVersion) {
-      this.transferDataFactory.createServerItem(newItem);
-      this.modeStates.isCreate = false;
-      this.newItem = {};
-      this.servers = this.getServers();
-    } else {
-      alert('Empty new object');
-    }
-  }
-
-  saveEdit(item) {
-    this.transferDataFactory.editServiceItem(item);
-    this.modeStates.toDefault();
-    this.servers = this.getServers();
-    this.editStartedflag = false;
-  }
-
-  resetEdit() {
-    this.servers = this.getServers();
-    this.modeStates.toDefault();
-  }
-
   updateField(item, prop, value) {
     item[prop] = value;
     this.transferDataFactory.editServiceItem(item);
@@ -96,7 +160,7 @@ class MainController {
 
   getInitialValues() {
     this.transferDataFactory.getInitialValues();
-    this.modeStates.toDefault();
+
   }
 
   getUsedVersion() {
@@ -110,41 +174,7 @@ class MainController {
     return usedVersions;
   }
 
-  handleCreate() {
-    this.modeStates.toDefault();
-    this.modeStates.isCreate = true;
-  }
-
-  cancelCreating() {
-    this.modeStates.isCreate = false;
-    this.newItem = {};
-  }
-
-  handleEdit($index) {
-
-    if (this.editStartedflag) {
-      this.servers = this.getServers();
-      this.editStartedflag = false;
-    }
-
-    this.modeStates.toDefault();
-    this.editStartedflag = true;
-    this.modeStates.isEdit[$index] = true;
-  }
-
-  handleUpdate($index) {
-
-    if (this.modeStates.isUpdate[$index]) {
-      this.modeStates.isUpdate[$index] = false;
-    } else {
-      this.modeStates.toDefault();
-      this.modeStates.isUpdate[$index] = true;
-    }
-  }
-
-  handleDelete(item, $index) {
-    this.transferDataFactory.deleteServiceItem(item);
-    this.modeStates.toDefault();
+  updateServers() {
     this.servers = this.getServers();
   }
 
