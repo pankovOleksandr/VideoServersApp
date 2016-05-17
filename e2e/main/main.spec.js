@@ -149,11 +149,58 @@ describe('Main View', function() {
 
   });
 
-  function createTestItem() {
+  xdescribe('Filter works correctly', function() {
+    var currentVersion;
+    var oldCount;
+
+    beforeEach(function() {
+      createTestItem();
+      page.firstServerCurrentVersion.getText()
+        .then(function(value) {
+          currentVersion = value;
+      }).then(function() {
+        page.filterSelectEl.sendKeys(currentVersion);
+        page.serversRows.count().then(function(value) {
+          oldCount = value;
+        })
+      });
+    });
+
+    it('it should filter correctly servers list', function() {
+
+      createTestItem({
+        ip: "",
+        name: '',
+        currentVersion : "222.22.22.22"
+      });
+
+      createTestItem();
+      oldCount++;
+
+      expect(page.serversRows.count()).toEqual(oldCount);
+      expect(page.serversRows.count()).toBe(oldCount);
+
+    });
+  });
+
+
+  function createTestItem(opts) {
+    var ip, name, currentVersion;
+
+    if (opts) {
+      ip = opts.ip || "111.11.111.111",
+        name = opts.name || "Test",
+        currentVersion = opts.currentVersion || "111.11.11.11";
+    } else {
+      ip = "111.11.111.111",
+      name =  "Test",
+      currentVersion = "111.11.11.11";
+    }
+
     page.createBtn.click();
-    page.newIpInput.sendKeys("111.11.111.111");
-    page.newNameInput.sendKeys("Test");
-    page.newCurrentVersionInput.sendKeys("111.11.11.11");
+    page.newIpInput.sendKeys(ip);
+    page.newNameInput.sendKeys(name);
+    page.newCurrentVersionInput.sendKeys(currentVersion);
     page.addBtn.click();
   }
 
