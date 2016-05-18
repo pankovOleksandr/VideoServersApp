@@ -2,10 +2,10 @@
  * Created by opankov on 4/29/2016.
  */
 
-'use strict';
-
 (function() {
 
+  'use strict';
+  
   angular.module('videoServersApp')
     .factory('defaultData', function createDefaultData() {
       var randomVersions = ["111.93.55.31","351.22.82.91","981.55.10.23","121.20.77.99","941.52.23.18","142.52.80.21"];

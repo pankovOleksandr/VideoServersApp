@@ -1,7 +1,7 @@
-'use strict';
-
 (function () {
-
+  
+  'use strict';
+  
 	angular.module('videoServersApp')
 	  .factory('transferDataFactory', ['defaultData', 'localStorageService', '$http', '$rootScope', function transferDataFactory(defaultData,
                                                                                                                                localStorage,

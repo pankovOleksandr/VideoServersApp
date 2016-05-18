@@ -1,11 +1,9 @@
 /**
  * Created by opankov on 5/10/2016.
  */
-
-'use strict';
-
 (function () {
-
+  'use strict';
+  
   function UpdateVersionController() {
     var ctrl = this;
 

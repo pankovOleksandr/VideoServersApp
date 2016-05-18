@@ -1,7 +1,7 @@
-'use strict';
 
 (function() {
-
+  
+  'use strict';
 class MainController {
 
   constructor(transferDataFactory, $scope, $q, $timeout) {
