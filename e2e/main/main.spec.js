@@ -10,7 +10,7 @@ describe('Main View', function() {
     page = require('./main.po');
   });
 
-  xdescribe('Initial view', function () {
+  describe('Initial view', function () {
 
     it('should include jumbotron with correct data', function() {
       expect(page.h1El.getText()).toBe('Spectrum Video Servers');
@@ -44,7 +44,7 @@ describe('Main View', function() {
 
   });
 
-  xdescribe('Creating item', function() {
+  describe('Creating item', function() {
 
     it('should show block with correct data', function () {
       page.createBtn.click();
@@ -81,7 +81,7 @@ describe('Main View', function() {
 
   });
 
-  xdescribe('Deleting items', function() {
+  describe('Deleting items', function() {
     var count;
 
     beforeEach(function() {
@@ -102,7 +102,7 @@ describe('Main View', function() {
 
   });
 
-  xdescribe('Editing items', function() {
+  describe('Editing items', function() {
     var ip, name, currentVersion;
 
     beforeEach(function() {
@@ -149,7 +149,7 @@ describe('Main View', function() {
 
   });
 
-  xdescribe('Filter works correctly', function() {
+  describe('Filter works correctly', function() {
     var currentVersion;
     var oldCount;
 
@@ -183,6 +183,35 @@ describe('Main View', function() {
     });
   });
 
+  describe('Updating version', function() {
+    var currentVersion;
+
+    beforeEach(function() {
+      createTestItem();
+      page.firstServerCurrentVersion.getText()
+        .then(function(value) {
+          currentVersion = value;
+        })
+    });
+
+    it('should update version correctly and cancel process', function() {
+
+      page.updateVersionBtn.click();
+      expect(page.versionsOptions.count()).toEqual(6);
+      expect(page.versionsOptions.first().getText()).toBe('111.93.55.31');
+
+      page.versionsOptions.first().click();
+      page.updateBtn.click();
+      expect(page.firstServerCurrentVersion.getText()).toBe('111.93.55.31');
+
+      page.updateVersionBtn.click();
+      page.versionsOptions.last().click();
+      expect(page.versionsOptions.last().getText()).toBe('142.52.80.21');
+      page.cancelBtn.click();
+      expect(page.firstServerCurrentVersion.getText()).toBe('111.93.55.31');
+
+    })
+  });
 
   function createTestItem(opts) {
     var ip, name, currentVersion;
