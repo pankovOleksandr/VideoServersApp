@@ -8,8 +8,7 @@
 var MainPage = function() {
   // header elements
   this.harmonicHeader = element(by.css('.harmonic-head'));
-  this.h1El = this.harmonicHeader.element(by.css('h1'));
-  this.imgEl = this.harmonicHeader.element(by.css('img'));
+  this.h1El = this.harmonicHeader.element(by.css('h1'));  
   this.p = this.harmonicHeader.element(by.css('.lead'));
   // buttons
   this.createBtn = element(by.buttonText('Create'));
