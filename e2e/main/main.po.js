@@ -8,8 +8,7 @@
 var MainPage = function() {
   // header elements
   this.harmonicHeader = element(by.css('.harmonic-head'));
-  this.h1El = this.harmonicHeader.element(by.css('h1'));
-  this.imgEl = this.harmonicHeader.element(by.css('img'));
+  this.h1El = this.harmonicHeader.element(by.css('h1'));  
   this.p = this.harmonicHeader.element(by.css('.lead'));
   // buttons
   this.createBtn = element(by.buttonText('Create'));
@@ -20,6 +19,8 @@ var MainPage = function() {
   this.editBtn = element(by.buttonText('Edit'));
   this.saveBtn = element(by.buttonText('Save'));
   this.resetBtn = element(by.buttonText('Reset'));
+  this.updateVersionBtn = element(by.buttonText('Update version'));
+  this.updateBtn = element(by.buttonText('Update'));
 
   this.filterSelectEl = element(by.model('main.filterValue'));
   this.listHeaders = element.all(by.css('#list-header div'));
@@ -39,7 +40,7 @@ var MainPage = function() {
   this.editNameInput = element(by.model('server.name'));
   this.editCurrentVersionInput = element(by.model('server.currentVersion'));
 
-
+  this.versionsOptions = element.all(by.css('select[ng-model="$ctrl.myVersion"] option'));
 };
 
 module.exports = new MainPage();
