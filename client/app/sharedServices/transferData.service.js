@@ -1,13 +1,13 @@
 (function () {
-  
+
   'use strict';
-  
+
 	angular.module('videoServersApp')
 	  .factory('transferDataFactory', ['defaultData', 'localStorageService', '$http', '$rootScope', function transferDataFactory(defaultData,
                                                                                                                                localStorage,
                                                                                                                                $http,
                                                                                                                                $rootScope){
-	  	return function createTransferDataApi(){
+	  	// return function createTransferDataApi(){
 
 	  		var publicAPI = {
             getServersList : getServersList,
@@ -17,15 +17,15 @@
             getVersions : getVersions,
             getInitialValues: getInitialValues
           },
-            servers = localStorage.getFromLocalStorage('servers') || defaultData.getServers() || [],
-            versions = localStorage.getFromLocalStorage('versions') || defaultData.getVersions() || [];
+            servers = localStorage.getFromLocalStorage('servers') || defaultData.getServers(),
+            versions = localStorage.getFromLocalStorage('versions') || defaultData.getVersions();
 
         init();
 
         return publicAPI;
 
         function init() {
-          if (servers.length == 0 || versions.length == 0) {
+          if (!servers || !versions) {
             throw new Error('!!! Empty servers list or versions list default values ');
           } else {
             servers.forEach(function(el, i) {
@@ -103,7 +103,7 @@
           )
         }
 
-	  	};
+	  	// };
 	  }])
 
   })();

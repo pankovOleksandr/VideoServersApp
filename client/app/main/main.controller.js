@@ -1,13 +1,13 @@
 
 (function() {
-  
+
   'use strict';
 class MainController {
 
   constructor(transferDataFactory, $scope, $q, $timeout) {
     this.servers = [];
     this.versions = [];
-    this.transferDataFactory = transferDataFactory();
+    this.transferDataFactory = transferDataFactory;
     this.modeStates = {
       isCreate: false,
       isEdit : {},
