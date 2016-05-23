@@ -3,7 +3,7 @@
  */
 (function () {
   'use strict';
-  
+
   function UpdateVersionController() {
     var ctrl = this;
 
@@ -29,7 +29,7 @@
 
   angular.module('videoServersApp')
     .component('hmUpdateVersion', {
-      templateUrl: 'app/updateVersion/updateVersion.html',
+      templateUrl: 'app/components/updateVersion/updateVersion.html',
       controller: UpdateVersionController,
       bindings: {
         onUpdate: '&',
