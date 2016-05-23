@@ -7,8 +7,6 @@
                                                                                                                                localStorage,
                                                                                                                                $http,
                                                                                                                                $rootScope){
-	  	// return function createTransferDataApi(){
-
 	  		var publicAPI = {
             getServersList : getServersList,
             createServerItem : createItem,
@@ -102,8 +100,6 @@
             }
           )
         }
-
-	  	// };
 	  }])
 
   })();
